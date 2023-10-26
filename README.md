@@ -24,8 +24,12 @@ FUNZIONALITÀ
 - eliminazione lista personalizzata
 - inserimento/rimozione di un film da una lista personalizzata
 - contrassegnamento di un film come visto
-- aggiunta film visto alla lista di film preferiti
 - visulizzazione delle liste di un utente
+
+//FACOLTATIVE
 - inserimento di una valutazione personale in stelle
 - inserimento di una valutazione personale come commento
 - funzione che estrae un film random tra quelli da vedere
+
+MODELLO ER
+![Alt text](image.png)
