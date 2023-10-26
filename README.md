@@ -32,4 +32,27 @@ FUNZIONALITÀ
 - funzione che estrae un film random tra quelli da vedere
 
 MODELLO ER
-![Alt text](image.png)
+![Alt text](modello/er.png)
+
+SCHEMA RELAZIONALE
+![Alt text](modello/schemaRelazionale.png)
+
+MOCKUP
+
+schermata di login
+![Alt text](modello/image.png)
+
+schermata ricerca
+![Alt text](modello/image-1.png)
+
+visualizzazione di una lista
+![Alt text](modello/image-2.png)
+
+visualizzazione scheda di un regista
+![Alt text](modello/image-3.png)
+
+visualizzazione scheda di un film
+![Alt text](modello/image-4.png)
+
+visualizzazione profilo utente
+![Alt text](modello/image-5.png)
