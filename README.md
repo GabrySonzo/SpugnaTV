@@ -19,6 +19,7 @@ FUNZIONALITÀ
 - ricerca per nome/regista
 - funzione sfoglia dal catalogo di film
 - visualizzazione delle informazioni di un film
+- visualizzazione delle informazioni di un regista
 - creazione di una lista personalizzata
 - modifica lista personalizzata
 - eliminazione lista personalizzata
@@ -41,6 +42,9 @@ MOCKUP
 
 schermata di login
 ![Alt text](modello/image.png)
+
+schermata di registrazione
+![Alt text](modello/image-6.png)
 
 schermata ricerca
 ![Alt text](modello/image-1.png)
