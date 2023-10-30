@@ -46,6 +46,15 @@ schermata di login
 schermata di registrazione
 ![Alt text](modello/image-6.png)
 
+schermata registrazione film
+![Alt text](modello/image-7.png)
+
+schermata registrazione regista
+![Alt text](modello/image-8.png)
+
+schermata registrazione cast
+![Alt text](modello/image-9.png)
+
 schermata ricerca
 ![Alt text](modello/image-1.png)
 
