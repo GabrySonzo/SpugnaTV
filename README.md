@@ -61,6 +61,9 @@ schermata registrazione regista
 schermata registrazione cast
 ![Alt text](modello/image-9.png)
 
+schermata registrazione recensione
+![Alt text](modello/image-10.png)
+
 schermata ricerca
 ![Alt text](modello/image-1.png)
 
