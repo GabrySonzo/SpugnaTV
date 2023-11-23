@@ -26,8 +26,6 @@ FUNZIONALITÀ
 - inserimento/rimozione di un film da una lista personalizzata
 - contrassegnamento di un film come visto
 - visulizzazione delle liste di un utente
-
-//FACOLTATIVE
 - inserimento di una valutazione personale in stelle
 - inserimento di una valutazione personale come commento
 - funzione che estrae un film random tra quelli da vedere
@@ -36,7 +34,15 @@ MODELLO ER
 ![Alt text](modello/er.png)
 
 SCHEMA RELAZIONALE
-![Alt text](modello/schemaRelazionale.png)
+
+Utente (email*, username, password, foto_profilo)
+Lista(id*, nome, utente_email)
+Film (id*, titolo, Inno, durata, genere, trama, locandina, banner) Attore (id, nome, cognome, foto)
+Regista (id*, nome, cognome, data_nascita, data_morte, descrizione, foto)
+Recensione(id*, n_stelle, commento, utente_email, film_id)
+Comprende (lista id*, film id*)
+Recita (attore id*, film id*)
+Dirige (regista id*, film id*)
 
 MOCKUP
 
