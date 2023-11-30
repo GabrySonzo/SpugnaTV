@@ -35,14 +35,86 @@ MODELLO ER
 
 SCHEMA RELAZIONALE
 
-Utente (email*, username, password, foto_profilo)
-Lista(id*, nome, utente_email)
-Film (id*, titolo, Inno, durata, genere, trama, locandina, banner) Attore (id, nome, cognome, foto)
-Regista (id*, nome, cognome, data_nascita, data_morte, descrizione, foto)
-Recensione(id*, n_stelle, commento, utente_email, film_id)
-Comprende (lista id*, film id*)
-Recita (attore id*, film id*)
-Dirige (regista id*, film id*)
+- Utente (email*, username, password, foto_profilo)
+- Lista(id*, nome, utente_email)
+- Film (id*, titolo, Anno, durata, genere, trama, locandina, banner) Attori (id, nome, cognome, foto)
+- Registi(id*, nome, cognome, data_nascita, data_morte, descrizione, foto)
+- Recensioni(id*, n_stelle, commento, utente_email, film_id)
+- Comprende (lista id*, film id*)
+- Recita (attore id*, film id*)
+- Dirige (regista id*, film id*)
+
+MODELLO FISICO
+
+CREATE DATABASE IF NOT EXISTS spugnaTV;
+USE spugnaTV;
+
+CREATE TABLE IF NOT EXISTS Utente(
+    email VARCHAR(255) PRIMARY KEY,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    foto_profilo VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Lista(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    utente_mail VARCHAR(255) REFERENCES Utente(email) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Film(
+    id SERIAL PRIMARY KEY,
+    titolo VARCHAR(255) NOT NULL,
+    anno INT NOT NULL,
+    durata INT NOT NULL,
+    genere VARCHAR(255),
+    trama VARCHAR(1000),
+    locandina VARCHAR(255),  
+    banner VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Attori(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL,
+    foto VARCHAR(255) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS Registi(
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    cognome VARCHAR(255) NOT NULL,
+    data_nascita DATE NOT NULL,
+    data_morte DATE,
+    desccrizione VARCHAR(1000),
+    foto VARCHAR(255) NOT NULL  
+);
+
+CREATE TABLE IF NOT EXISTS Recensioni(
+    id SERIAL PRIMARY KEY,
+    nStelle INT NOT NULL,
+    commento VARCHAR(1000),
+    utente_mail VARCHAR(255) REFERENCES Utente(email) ON DELETE CASCADE,
+    film_id INT REFERENCES Film(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS Comprende(
+    lista_id INT REFERENCES Lista(id) ON DELETE CASCADE,
+    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
+    PRIMARY KEY (lista_id, film_id)
+);
+
+CREATE TABLE IF NOT EXISTS Recita(
+    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
+    attori_id INT REFERENCES Attori(id) ON DELETE CASCADE,
+    PRIMARY KEY (film_id, attori_id)
+);
+
+CREATE TABLE IF NOT EXISTS Dirige(
+    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
+    registi_id INT REFERENCES Registi(id) ON DELETE CASCADE,
+    PRIMARY KEY (film_id, registi_id)
+);
 
 MOCKUP
 
