@@ -35,8 +35,8 @@ MODELLO ER
 
 SCHEMA RELAZIONALE
 
-- Utente (email*, username, password, foto_profilo)
-- Lista(id*, nome, utente_email)
+- Utenti (email*, username, password, foto_profilo, ruolo)
+- Liste(id*, nome, utente_email)
 - Film (id*, titolo, Anno, durata, genere, trama, locandina, banner) Attori (id, nome, cognome, foto)
 - Registi(id*, nome, cognome, data_nascita, data_morte, descrizione, foto)
 - Recensioni(id*, n_stelle, commento, utente_email, film_id)
@@ -49,14 +49,15 @@ MODELLO FISICO
 CREATE DATABASE IF NOT EXISTS spugnaTV;
 USE spugnaTV;
 
-CREATE TABLE IF NOT EXISTS Utente(
+CREATE TABLE IF NOT EXISTS Utenti(
     email VARCHAR(255) PRIMARY KEY,
     username VARCHAR(255) NOT NULL,
     password VARCHAR(255) NOT NULL,
+    ruolo VARCHAR(10) NOT NULL,
     foto_profilo VARCHAR(255)
 );
 
-CREATE TABLE IF NOT EXISTS Lista(
+CREATE TABLE IF NOT EXISTS Liste(
     id SERIAL PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
     utente_mail VARCHAR(255) REFERENCES Utente(email) ON DELETE CASCADE
