@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `spugnaTV`
+-- Database: `SpugnaTV`
 --
 
 -- --------------------------------------------------------
@@ -26,6 +26,8 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `Attori`
 --
+CREATE DATABASE IF NOT EXISTS `SpugnaTV` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `SpugnaTV`;
 
 CREATE TABLE `Attori` (
   `id` bigint(20) UNSIGNED NOT NULL,
@@ -79,7 +81,7 @@ CREATE TABLE `Film` (
 -- Struttura della tabella `Lista`
 --
 
-CREATE TABLE `Lista` (
+CREATE TABLE `Liste` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
   `utente_mail` varchar(255) DEFAULT NULL
@@ -132,7 +134,7 @@ CREATE TABLE `Registi` (
 -- Struttura della tabella `Utente`
 --
 
-CREATE TABLE `Utente` (
+CREATE TABLE `Utenti` (
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
@@ -170,7 +172,7 @@ ALTER TABLE `Film`
 --
 -- Indici per le tabelle `Lista`
 --
-ALTER TABLE `Lista`
+ALTER TABLE `Liste`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -194,7 +196,7 @@ ALTER TABLE `Registi`
 --
 -- Indici per le tabelle `Utente`
 --
-ALTER TABLE `Utente`
+ALTER TABLE `Utenti`
   ADD PRIMARY KEY (`email`);
 
 --
@@ -216,7 +218,7 @@ ALTER TABLE `Film`
 --
 -- AUTO_INCREMENT per la tabella `Lista`
 --
-ALTER TABLE `Lista`
+ALTER TABLE `Liste`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --

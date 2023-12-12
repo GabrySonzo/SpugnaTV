@@ -8,12 +8,22 @@ $email = $_POST['email'];
 
 $password = md5($password);
 try{
-    $register = "insert into utenti (email,nome,password) values ('$email','$username','$password')";
-    
+    $register = "insert into Utente (email,username,password) values ('$email','$username','$password')";
+
+    if ($connessione->query($register)){
+        echo "Registration successful!";
+        header("Location: login.php");
+    }
 }catch(Exception $e)
 {
     $message = $e->getMessage();
-    //redirect to register page
+    echo $message;
+    if($message == "Duplicate entry '$email' for key 'PRIMARY'"){
+        header("Location: register.php?error=2");
+    }
+    else{
+        echo "Registration failed";
+    }
 }
 
 ?>
