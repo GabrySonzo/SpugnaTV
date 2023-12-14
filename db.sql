@@ -1,9 +1,11 @@
+CREATE DATABASE IF NOT EXISTS `SpugnaTV` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `SpugnaTV`;
 -- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Creato il: Dic 04, 2023 alle 13:41
+-- Creato il: Dic 14, 2023 alle 10:35
 -- Versione del server: 10.4.28-MariaDB
 -- Versione PHP: 8.2.4
 
@@ -26,8 +28,6 @@ SET time_zone = "+00:00";
 --
 -- Struttura della tabella `Attori`
 --
-CREATE DATABASE IF NOT EXISTS `SpugnaTV` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `SpugnaTV`;
 
 CREATE TABLE `Attori` (
   `id` bigint(20) UNSIGNED NOT NULL,
@@ -78,7 +78,7 @@ CREATE TABLE `Film` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Lista`
+-- Struttura della tabella `Liste`
 --
 
 CREATE TABLE `Liste` (
@@ -131,7 +131,7 @@ CREATE TABLE `Registi` (
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Utente`
+-- Struttura della tabella `Utenti`
 --
 
 CREATE TABLE `Utenti` (
@@ -140,6 +140,13 @@ CREATE TABLE `Utenti` (
   `password` varchar(255) NOT NULL,
   `foto_profilo` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dump dei dati per la tabella `Utenti`
+--
+
+INSERT INTO `Utenti` (`email`, `username`, `password`, `foto_profilo`) VALUES
+('gabrisonzo@gmail.com', 'GabrySonzo', '21232f297a57a5a743894a0e4a801fc3', NULL);
 
 --
 -- Indici per le tabelle scaricate
@@ -170,7 +177,7 @@ ALTER TABLE `Film`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `Lista`
+-- Indici per le tabelle `Liste`
 --
 ALTER TABLE `Liste`
   ADD PRIMARY KEY (`id`);
@@ -194,7 +201,7 @@ ALTER TABLE `Registi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `Utente`
+-- Indici per le tabelle `Utenti`
 --
 ALTER TABLE `Utenti`
   ADD PRIMARY KEY (`email`);
@@ -216,7 +223,7 @@ ALTER TABLE `Film`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `Lista`
+-- AUTO_INCREMENT per la tabella `Liste`
 --
 ALTER TABLE `Liste`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;

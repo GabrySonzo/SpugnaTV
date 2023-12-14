@@ -24,6 +24,7 @@
         if (isset($_GET['error']) && $_GET['error'] == 2) {
             echo "<br>email already in use";
         }
+        // CONFERMA PASSWORD DA IMPLEMENTARE
     ?>
 </body>
 </html>

@@ -151,3 +151,6 @@ visualizzazione scheda di un film
 
 visualizzazione profilo utente
 ![Alt text](modello/image-5.png)
+
+COMANDI
+docker run --name myXampp -p 41061:22 -p 41062:80 -d -v /workspaces/SpugnaTV:/www tomsik68/xampp:8

@@ -8,7 +8,7 @@ $email = $_POST['email'];
 
 $password = md5($password);
 try{
-    $register = "insert into Utente (email,username,password) values ('$email','$username','$password')";
+    $register = "insert into Utenti (email,username,password) values ('$email','$username','$password')";
 
     if ($connessione->query($register)){
         echo "Registration successful!";
