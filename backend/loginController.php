@@ -22,17 +22,14 @@ try {
         else{
             $_SESSION ['admin'] = false;
         }
-        // Redirect to home page or any other desired page
-        header("Location: index.php");
+        header("Location: ../frontend/index.php");
     } else {
-        // User not found
         echo "Invalid email or password";
-        header("Location: login.php?error=1");
+        header("Location: ../frontend/login.php?error=1");
     }
 } catch (Exception $e) {
     $message = $e->getMessage();
-    // Redirect to login page or any other desired page
-    header("Location: login.php");
+    header("Location: ../frontend/login.php?error=2");
 }
 
 ?>

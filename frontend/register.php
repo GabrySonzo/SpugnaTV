@@ -5,7 +5,7 @@
     </head>
 <body>
     <h1>Register</h1>
-    <form method="POST" action="registerController.php">
+    <form method="POST" action="../backend/registerController.php">
         <label for="username">Username:</label>
         <input type="text" name="username" id="username" required><br>
 
@@ -21,10 +21,12 @@
         <input type="submit" value="Register">
     </form>
     <?php
+        if (isset($_GET['error']) && $_GET['error'] == 1) {
+            echo "<br>confirm password does not match";
+        }
         if (isset($_GET['error']) && $_GET['error'] == 2) {
             echo "<br>email already in use";
         }
-        // CONFERMA PASSWORD DA IMPLEMENTARE
     ?>
 </body>
 </html>

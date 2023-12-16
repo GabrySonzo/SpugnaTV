@@ -124,7 +124,7 @@ CREATE TABLE `Registi` (
   `cognome` varchar(255) NOT NULL,
   `data_nascita` date NOT NULL,
   `data_morte` date DEFAULT NULL,
-  `desccrizione` varchar(1000) DEFAULT NULL,
+  `descrizione` varchar(1000) DEFAULT NULL,
   `foto` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
