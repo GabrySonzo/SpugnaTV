@@ -16,6 +16,7 @@
         <?php endif; ?>
         <a href="logout.php"><button>Logout</button></a>
         <?php
+        //provas
             if(isset($_GET['error']) && $_GET['error'] == 1)
             {
                 echo "<br><br>Errore nella registrazione del film!";
