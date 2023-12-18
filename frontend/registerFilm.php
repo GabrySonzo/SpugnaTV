@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Register film Page</title>
+    <head>
+        <title>Register film Page</title>
+        <?php
+        include '../backend/connessione.php';
+        $directors = $connessione->query("SELECT * FROM Registi");
+        echo $directors->num_rows;
+    ?>
 </head>
 <body>
     <h2>Registra film</h2>
@@ -28,6 +33,14 @@
         <label for="banner">Banner(URL):</label>
         <input type="text" id="banner" name="banner" ><br><br>
         
+        <label for="regista">Regista:</label>
+        <select id="regista" name="regista">
+            <?php
+            while ($director = $directors->fetch_assoc()) {
+                echo "<option value='" . $director['id'] . "'>" . $director['nome'] . "</option>";
+            }
+            ?>
+        </select><br><br>
         <input type="submit" value="Registra Film">
         
     </form>
