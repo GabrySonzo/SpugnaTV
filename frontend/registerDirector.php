@@ -28,7 +28,7 @@
         <input type="submit" value="Registra regista">
     </form>
     <br>
-    <a href="index.php"><button>Torna indietro</button></a>
+    <a href="home.php"><button>Torna indietro</button></a>
     <br>
     <?php
     

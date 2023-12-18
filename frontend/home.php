@@ -13,10 +13,15 @@
         <?php if ($_SESSION['admin'] == true): ?>
             <a href="registerFilm.php"><button>inserisci film</button></a>
             <a href="registerDirector.php"><button>inserisci regista</button></a>
+            <a href="registerActor.php"><button>inserisci attore</button></a>
+            <br><br>
         <?php endif; ?>
+        <a href="list.php?name=tosee"><button>Da vedere</button></a>
+        <a href="search.php"><button>Cerca film</button></a>
+        <a href="profile.php"><button>Profilo</button></a>
+        <br><br>
         <a href="logout.php"><button>Logout</button></a>
         <?php
-        //provas
             if(isset($_GET['error']) && $_GET['error'] == 1)
             {
                 echo "<br><br>Errore nella registrazione del film!";
@@ -32,6 +37,14 @@
             if(isset($_GET['succ']) && $_GET['succ'] == 2)
             {
                 echo "<br><br>Regista registrato con successo!";
+            }
+            if(isset($_GET['error']) && $_GET['error'] == 3)
+            {
+                echo "<br><br>Errore nella registrazione dell attore!";
+            }
+            if(isset($_GET['succ']) && $_GET['succ'] == 3)
+            { 
+                echo "<br><br>Attore registrato con successo!";
             }
         ?>
         

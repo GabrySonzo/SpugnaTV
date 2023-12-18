@@ -24,13 +24,13 @@ try{
 
     if ($connessione->query($register)){
         echo "Registration successful!";
-        //header("Location: ../frontend/index.php?succ=2");
+        header("Location: ../frontend/home.php?succ=2");
     }
 }catch(Exception $e)
 {
     $message = $e->getMessage();
     echo $message;
-    header("Location: ../frontend/index.php?error=$message");
+    header("Location: ../frontend/home.php?error=2");
 }
 
 ?>

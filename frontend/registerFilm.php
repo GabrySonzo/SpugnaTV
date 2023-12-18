@@ -5,7 +5,7 @@
         <?php
         include '../backend/connessione.php';
         $directors = $connessione->query("SELECT * FROM Registi");
-        echo $directors->num_rows;
+        $actors = $connessione->query("SELECT * FROM Attori");
     ?>
 </head>
 <body>
@@ -37,15 +37,25 @@
         <select id="regista" name="regista">
             <?php
             while ($director = $directors->fetch_assoc()) {
-                echo "<option value='" . $director['id'] . "'>" . $director['nome'] . "</option>";
+                echo "<option value='" . $director['id'] . "'>" . $director['nome'] ." ".$director['cognome'] . "</option>";
             }
             ?>
         </select><br><br>
+
+        <label for="attore">Attore:</label>
+        <select id="attore" name="attore">
+            <?php
+            while ($actor = $actors->fetch_assoc()) {
+                echo "<option value='" . $actor['id'] . "'>" . $actor['nome'] ." ".$actor['cognome'] . "</option>";
+            }
+            ?>
+        </select><br><br>
+
         <input type="submit" value="Registra Film">
         
     </form>
     <br>
-    <a href="index.php"><button>Torna indietro</button></a>
+    <a href="home.php"><button>Torna indietro</button></a>
     <br>
     <?php
     

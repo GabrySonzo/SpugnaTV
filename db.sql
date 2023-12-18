@@ -88,7 +88,9 @@ CREATE TABLE `Liste` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
-
+INSERT INTO `Liste` (`id`, `nome`, `utente_mail`) VALUES
+(1, 'Film visti', 'gabrisonzo@gmail.com'),
+(2, 'Film da vedere', 'gabrisonzo@gmail.com');
 --
 -- Struttura della tabella `Recensioni`
 --

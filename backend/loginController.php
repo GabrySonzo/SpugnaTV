@@ -22,7 +22,7 @@ try {
         else{
             $_SESSION ['admin'] = false;
         }
-        header("Location: ../frontend/index.php");
+        header("Location: ../frontend/home.php");
     } else {
         echo "Invalid email or password";
         header("Location: ../frontend/login.php?error=1");

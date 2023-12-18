@@ -20,6 +20,9 @@
         
         <input type="submit" value="Register">
     </form>
+    <br>
+    <a href="login.php"><button>Login</button></a>
+    <br>
     <?php
         if (isset($_GET['error']) && $_GET['error'] == 1) {
             echo "<br>confirm password does not match";
