@@ -44,79 +44,6 @@ SCHEMA RELAZIONALE
 - Recita (attore id*, film id*)
 - Dirige (regista id*, film id*)
 
-MODELLO FISICO
-
-CREATE DATABASE IF NOT EXISTS spugnaTV;
-USE spugnaTV;
-
-CREATE TABLE IF NOT EXISTS Utenti(
-    email VARCHAR(255) PRIMARY KEY,
-    username VARCHAR(255) NOT NULL,
-    password VARCHAR(255) NOT NULL,
-    ruolo VARCHAR(10) NOT NULL,
-    foto_profilo VARCHAR(255)
-);
-
-CREATE TABLE IF NOT EXISTS Liste(
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    utente_mail VARCHAR(255) REFERENCES Utente(email) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Film(
-    id SERIAL PRIMARY KEY,
-    titolo VARCHAR(255) NOT NULL,
-    anno INT NOT NULL,
-    durata INT NOT NULL,
-    genere VARCHAR(255),
-    trama VARCHAR(1000),
-    locandina VARCHAR(255),  
-    banner VARCHAR(255)
-);
-
-CREATE TABLE IF NOT EXISTS Attori(
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cognome VARCHAR(255) NOT NULL,
-    foto VARCHAR(255) NOT NULL
-);
-
-CREATE TABLE IF NOT EXISTS Registi(
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255) NOT NULL,
-    cognome VARCHAR(255) NOT NULL,
-    data_nascita DATE NOT NULL,
-    data_morte DATE,
-    desccrizione VARCHAR(1000),
-    foto VARCHAR(255) NOT NULL  
-);
-
-CREATE TABLE IF NOT EXISTS Recensioni(
-    id SERIAL PRIMARY KEY,
-    nStelle INT NOT NULL,
-    commento VARCHAR(1000),
-    utente_mail VARCHAR(255) REFERENCES Utente(email) ON DELETE CASCADE,
-    film_id INT REFERENCES Film(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS Comprende(
-    lista_id INT REFERENCES Lista(id) ON DELETE CASCADE,
-    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
-    PRIMARY KEY (lista_id, film_id)
-);
-
-CREATE TABLE IF NOT EXISTS Recita(
-    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
-    attori_id INT REFERENCES Attori(id) ON DELETE CASCADE,
-    PRIMARY KEY (film_id, attori_id)
-);
-
-CREATE TABLE IF NOT EXISTS Dirige(
-    film_id INT REFERENCES Film(id) ON DELETE CASCADE,
-    registi_id INT REFERENCES Registi(id) ON DELETE CASCADE,
-    PRIMARY KEY (film_id, registi_id)
-);
-
 MOCKUP
 
 schermata di login
@@ -152,5 +79,14 @@ visualizzazione scheda di un film
 visualizzazione profilo utente
 ![Alt text](modello/image-5.png)
 
-COMANDI
-docker run --name myXampp -p 41061:22 -p 41062:80 -d -v /workspaces/SpugnaTV:/www tomsik68/xampp:8
+ISTRUZIONI
+- eseguire il comando:
+    docker run --name myXampp -p 41061:22 -p 41062:80 -d -v /workspaces/SpugnaTV:/www tomsik68/xampp:8
+- aprire l'indirizzo del docker nel browser
+- aprire phpmyadmin e creare il databese eseguendo il file db.sql
+- digitare /www alla fine dell url
+
+N.B.
+per avere accesso alle funzioni da amministratore accedere come
+email: gabrisonzo@gmail.com
+pswd: admin
