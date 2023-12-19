@@ -9,16 +9,30 @@ $genere = $_POST['genere'];
 $trama = $_POST['trama'];
 $locandina = $_POST['locandina'];
 $banner = $_POST['banner'];
-$regista = $_POST['regista'];
-$attore = $_POST['attore'];
+
+$registi = array();
+$index = 1;
+while(isset($_POST['regista'.$index])){
+    $registi[$index-1] = $_POST['regista'.$index];
+    $index++;
+}
+
+$attori = array();
+$index = 1;
+while(isset($_POST['attore'.$index])){
+    $attori[$index-1] = $_POST['attore'.$index];
+    $index++;
+}
+
+
 
 try{
     $register = "insert into Film (titolo, anno, durata, genere, trama, locandina, banner) values ('$titolo', '$anno', '$durata', '$genere', '$trama', '$locandina', '$banner')";
     if ($connessione->query($register)){
-        if(isset($regista)){
+        while($regista = array_pop($registi)){
             $connessione->query("insert into Dirige (registi_id, film_id) values ('$regista', (SELECT id FROM Film WHERE titolo = '$titolo'))");
         }
-        if(isset($attore)){
+        while($attore = array_pop($attori)){
             $connessione->query("insert into Recita (attori_id, film_id) values ('$attore', (SELECT id FROM Film WHERE titolo = '$titolo'))");
         }
         echo "Registration successful!";

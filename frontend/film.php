@@ -15,10 +15,10 @@
     <p><?php echo $film['genere'] ?></p>
     <p><?php echo $film['trama'] ?></p>
     <div>
-        Regista:
+        Registi:
         <?php
             while ($director = $directors->fetch_assoc()) {
-                echo "<a href='director.php?director=".$director['id']."'><p>" . $director['nome'] ." ".$director['cognome'] . "</p></a>";
+                echo "<a href='director.php?director=".$director['id']."'><p>- " . $director['nome'] ." ".$director['cognome'] . "</p></a>";
             }
         ?>
     </div>
@@ -26,11 +26,10 @@
         Attori:
         <?php
             while ($actor = $actors->fetch_assoc()) {
-                echo "<p>" . $actor['nome'] ." ".$actor['cognome'] . "</p>";
+                echo "<p>- " . $actor['nome'] ." ".$actor['cognome'] . "</p>";
             }
         ?>
     </div>
-    <br>
     <a href="home.php"><button>Torna indietro</button></a>
     <br>
 </body>

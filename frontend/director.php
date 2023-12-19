@@ -17,11 +17,10 @@
         Film diretti dal regista:
         <?php
             while ($film = $films->fetch_assoc()) {
-                echo "<a href='film.php?film=".$film['id']."'><p>" . $film['titolo'] . "</p></a>";
+                echo "<a href='film.php?film=".$film['id']."'><p>- " . $film['titolo'] . "</p></a>";
             }
         ?>
     </div>
-    <br>
     <a href="home.php"><button>Torna indietro</button></a>
     <br>
 </body>

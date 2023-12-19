@@ -6,9 +6,13 @@
         include '../backend/connessione.php';
         $directors = $connessione->query("SELECT * FROM Registi");
         $actors = $connessione->query("SELECT * FROM Attori");
-    ?>
-</head>
-<body>
+        ?>
+    </head>
+    <body>
+    <script>
+        var indexDirector = 1;
+        var indexActor = 1;
+    </script>
     <h2>Registra film</h2>
     <form method="POST" action="../backend/filmController.php">
 
@@ -33,23 +37,49 @@
         <label for="banner">Banner(URL):</label>
         <input type="text" id="banner" name="banner" ><br><br>
         
-        <label for="regista">Regista:</label>
-        <select id="regista" name="regista">
-            <?php
-            while ($director = $directors->fetch_assoc()) {
-                echo "<option value='" . $director['id'] . "'>" . $director['nome'] ." ".$director['cognome'] . "</option>";
-            }
-            ?>
-        </select><br><br>
+        <div id="registi">
+            <button type="button" onclick="addSelectDirector()">Aggiungi Regista</button><br><br>
+        </div>
 
-        <label for="attore">Attore:</label>
-        <select id="attore" name="attore">
-            <?php
-            while ($actor = $actors->fetch_assoc()) {
-                echo "<option value='" . $actor['id'] . "'>" . $actor['nome'] ." ".$actor['cognome'] . "</option>";
+        <script>
+            function addSelectDirector() {
+                var selectContainer = document.createElement("div");
+                selectContainer.innerHTML = `
+                <label for="regista">Regista `+indexDirector+`:</label>
+                <select id="regista"`+indexDirector+` name="regista`+indexDirector+`">
+                    <?php
+                    while ($director = $directors->fetch_assoc()) {
+                        echo "<option value='" . $director['id'] . "'>" . $director['nome'] ." ".$director['cognome'] . "</option>";
+                    }
+                    ?>
+                </select><br><br>
+                `;
+                document.getElementById("registi").appendChild(selectContainer);
+                indexDirector++;
             }
-            ?>
-        </select><br><br>
+        </script>
+
+        <div id="attori">
+            <button type="button" onclick="addSelectActor()">Aggiungi Attore</button><br><br>
+        </div>
+
+        <script>
+            function addSelectActor() {
+                var selectContainer = document.createElement("div");
+                selectContainer.innerHTML = `
+                <label for="attore">Attore `+indexActor+`:</label>
+                <select id="attore"`+indexActor+` name="attore`+indexActor+`">
+                    <?php
+                    while ($actor = $actors->fetch_assoc()) {
+                        echo "<option value='" . $actor['id'] . "'>" . $actor['nome'] ." ".$actor['cognome'] . "</option>";
+                    }
+                    ?>
+                </select><br><br>
+                `;
+                document.getElementById("attori").appendChild(selectContainer);
+                indexActor++;
+            }
+        </script>
 
         <input type="submit" value="Registra Film">
         
@@ -57,8 +87,5 @@
     <br>
     <a href="home.php"><button>Torna indietro</button></a>
     <br>
-    <?php
-    
-    ?>
 </body>
 </html>
