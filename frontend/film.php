@@ -30,6 +30,20 @@
             }
         ?>
     </div>
+    <div>
+        <?php
+            echo "<a href='../backend/addToList.php?film=".$_GET['film']."'><button>Aggiungi alla lista</button></a>";
+        ?>
+    </div>
+    <select id="liste" name="liste">
+        <?php
+        while ($list = $lists->fetch_assoc()) {
+            echo "<option value='" . $list['id'] . "'>" . $list['nome'] . "</option>";
+        }
+        ?>
+    </select>
+    <input type="button" value="Vai alla lista" onclick="location.href='../backend/addToList.php?list='+document.getElementById('liste').value">
+    <br>
     <a href="home.php"><button>Torna indietro</button></a>
     <br>
 </body>
