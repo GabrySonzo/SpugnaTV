@@ -4,6 +4,7 @@
     <title>Film Page</title>
 </head>
 <?php
+//prova
     include '../backend/connessione.php';
     $film = $connessione->query("SELECT * FROM Film WHERE id = '" . $_GET['film'] . "'")->fetch_assoc();
     $directors = $connessione->query("SELECT * FROM Registi INNER JOIN Dirige ON Registi.id = Dirige.registi_id WHERE film_id = '" . $_GET['film'] . "'");
