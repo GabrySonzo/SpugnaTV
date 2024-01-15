@@ -15,7 +15,6 @@
         <?php
             while ($film = $films->fetch_assoc()) {
                 echo "<a href='film.php?film=".$film['id']."'><p>- " . $film['titolo'] . "</p></a>";
-                // prova
             }
         ?>
     </div>

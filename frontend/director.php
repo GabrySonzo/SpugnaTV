@@ -21,6 +21,9 @@
             }
         ?>
     </div>
+    <br>
+    <a href="editDirector.php?director=<?php echo $_GET['director'] ?>"><button>Modifica regista</button></a>
+    <br>
     <a href="home.php"><button>Torna indietro</button></a>
     <br>
 </body>
