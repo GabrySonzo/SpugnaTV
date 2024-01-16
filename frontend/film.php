@@ -48,7 +48,7 @@
             }
         </script>
         <?php
-            echo "<a id='button' ><button>Aggiungi alla lista</button></a>";
+            echo "<a id='button' onclick='init()'><button>Aggiungi alla lista</button></a>";
             if(isset($_GET['error'])){
                 if($_GET['error'] == 1){
                     echo "<p>Il film è già presente nella lista</p>";
@@ -78,7 +78,7 @@
         ?>
     <br>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
 </body>
 </html>

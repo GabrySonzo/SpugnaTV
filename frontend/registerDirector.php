@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Registra regista</h2>
-    <form method="POST" action="../backend/directorController.php">
+    <form method="POST" action="../backend/addDirectorController.php">
 
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required><br><br>
@@ -28,7 +28,7 @@
         <input type="submit" value="Registra regista">
     </form>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
     <?php
     

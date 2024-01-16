@@ -5,7 +5,7 @@
 </head>
 <body>
     <h2>Registra attore</h2>
-    <form method="POST" action="../backend/actorController.php">
+    <form method="POST" action="../backend/addActorController.php">
 
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" required><br><br>
@@ -19,7 +19,7 @@
         <input type="submit" value="Registra attore">
     </form>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
     <?php
     

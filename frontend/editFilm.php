@@ -120,7 +120,7 @@
         
     </form>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
 </body>
 </html>

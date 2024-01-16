@@ -11,6 +11,8 @@
     <h2>Modifica regista</h2>
     <form method="POST" action="../backend/editDirectorController.php">
 
+        <input type="hidden" name="director" value="<?php echo $_GET['director']?>" />
+
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="<?php echo $director['nome'] ?>" required><br><br>
         
@@ -32,7 +34,7 @@
         <input type="submit" value="Modifica regista">
     </form>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
     <?php
     

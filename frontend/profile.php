@@ -49,9 +49,10 @@
     <a href="registerList.php"><button>Crea lista</button></a>
     <br>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
     <br>
+    <input type="button" value="Logout" onclick="location.href='../backend/logout.php'">
     <input type="button" value="Elimina utente" onclick="location.href='../backend/removeUser.php'">
     <br>
     <?php

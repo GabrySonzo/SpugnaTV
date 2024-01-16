@@ -8,7 +8,7 @@ $film = $_GET['film'];
 
 try{
     if($connessione->query("INSERT INTO Comprende (lista_id, film_id) VALUES ('" . $list . "', '" . $film . "')")){
-        header("Location: ../frontend/film.php?film=". $film . "&success=1");
+        header("Location: ../frontend/film.php?film=". $film . "&succ=1");
     }
     
 }catch(Exception $e)

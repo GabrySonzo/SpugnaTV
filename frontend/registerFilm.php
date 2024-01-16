@@ -48,7 +48,7 @@
     </script>
 
     <h2>Registra film</h2>
-    <form method="POST" action="../backend/filmController.php">
+    <form method="POST" action="../backend/addFilmController.php">
 
         <label for="titolo">Titolo:</label>
         <input type="text" id="titolo" name="titolo" required><br><br>
@@ -83,7 +83,7 @@
         
     </form>
     <br>
-    <a href="home.php"><button>Torna indietro</button></a>
+    <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
 </body>
 </html>
