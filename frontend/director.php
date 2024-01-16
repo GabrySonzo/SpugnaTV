@@ -25,6 +25,7 @@
     <?php
         if ($_SESSION['admin'] == true){
             echo "<a href='editDirector.php?director=".$_GET['director']."'><button>Modifica regista</button></a>";
+            echo "<a href='../backend/removeDirector.php?director=".$_GET['director']."'><button>Elimina regista</button></a>";
         }
         if(isset($_GET['succ']) && $_GET['succ'] == 1){
             echo "<p>Modifica avvenuta con successo</p>";
@@ -32,6 +33,10 @@
         if(isset($_GET['error']) &&$_GET['error'] == 1){
             echo "<p>Errore nella modifica</p>";
         }
+        if(isset($_GET['error']) && $_GET['error'] == 2){
+            echo "<p>Errore nella cancellazione</p>";
+        }
+
     ?>
     <br>
     <br>

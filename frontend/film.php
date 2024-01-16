@@ -11,7 +11,7 @@
     $actors = $connessione->query("SELECT * FROM Attori INNER JOIN Recita ON Attori.id = Recita.attori_id WHERE film_id = '" . $_GET['film'] . "'");
     $lists = $connessione->query("SELECT * FROM Liste WHERE utente_mail = '" . $_SESSION['id'] . "'");
 ?>
-<body onload=init()>
+<body>
     <h1><?php echo $film['titolo'] ?></h1>
     <p><?php echo $film['anno']." - ". intval(intval($film['durata'])/60) ."h ". intval($film['durata'])%60 ."min" ?></p>
     <p><?php echo $film['genere'] ?></p>
@@ -67,13 +67,19 @@
     <br>
         <?php
             if ($_SESSION['admin'] == true){
-                echo "<a href='editFilm.php?film=".$_GET['film']."'><button>Modifica film</button></a>";
+                echo "<a href='editFilm.php?film=".$_GET['film']."'><button>Modifica film</button></a>"; 
+                echo "<a href='../backend/removeFilm.php?film=".$_GET['film']."'><button>Elimina film</button></a>";
             }
             if(isset($_GET['succ']) && $_GET['succ'] == 2){
                 echo "<p>Modifica avvenuta con successo</p>";
             }
-            if(isset($_GET['error']) &&$_GET['error'] == 3){
-                echo "<p>Errore nella modifica</p>";
+            if(isset($_GET['error'])){
+                if($_GET['error'] == 3){
+                    echo "<p>Errore nella modifica</p>";
+                }
+                else if($_GET['error'] == 4){
+                    echo "<p>Errore nell'eliminazione</p>";
+                }
             }
         ?>
     <br>

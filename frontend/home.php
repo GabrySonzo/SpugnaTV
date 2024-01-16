@@ -51,6 +51,10 @@
             { 
                 echo "<br><br>Attore registrato con successo!";
             }
+            if(isset($_GET["succ"]) && $_GET["succ"] == 4)
+            {
+                echo "<br><br>Eliminazione avvenuta con successo!";
+            }
         ?>
         
     </body>
