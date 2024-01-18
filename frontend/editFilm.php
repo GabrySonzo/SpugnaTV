@@ -8,7 +8,6 @@
         $actors = $connessione->query("SELECT * FROM Attori");
         $film = $connessione -> query("SELECT * FROM Film WHERE id = '" . $_GET['film'] . "'") -> fetch_assoc();
         ?>
-        <script src="script.js"></script>
     </head>
     <body>
     <script>
@@ -17,11 +16,19 @@
         var indexNewDirector = 1;
         var indexNewActor = 1;
         
-        function directorRow(nome, cognome) {
-            var p = document.createElement("p");
-            p.innerHTML = "Regista "+ indexDirector +": "+ nome + " " + cognome;
-            document.getElementById("registi").appendChild(p);
-            indexDirector++;
+        function directorRow() {
+            <?php
+                $indexDirector = 1;
+                
+                $filmDirectors = $connessione->query("SELECT * FROM Registi INNER JOIN Dirige ON Registi.id = Dirige.registi_id WHERE film_id = '" . $_GET['film'] . "'");
+                echo 'console.log("'.$filmDirectors->num_rows.'");';
+                while ($director = $filmDirectors->fetch_assoc()) {
+                    echo 'var p = document.createElement("p");
+                    p.innerHTML = "Regista '.$indexDirector.': '.$director['nome'].' '.$director['cognome'].' <button type=\"button\" onclick=\"removeDirector('.$director['id'].')\">Remove</button>";
+                    document.getElementById("registi").appendChild(p);';
+                    $indexDirector++;
+                }
+            ?>
         }
 
         function addSelectDirector() {
@@ -65,10 +72,41 @@
             indexNewActor++;
         }
 
+        function removeDirector(id){
+            var film = <?php echo $_GET['film']?>;
+            var director = id;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../backend/api.php", true);
+            xhr.send(JSON.stringify({film: film, director: director}));
+
+            xhr.onload = function() {
+                if (this.status == 200 && this.readyState == 4) {
+                    console.log(this.responseText);
+                    document.getElementById("registi").innerHTML = "";
+                    //pausecomp(20000);
+                $connessione.close();
+                $connessione = new mysqli($host, $user, $password, $db);
+
+                    directorRow();
+                } else {
+                    console.log("Errore");
+                }
+            };
+            
+        }
+        function pausecomp(millis)
+        {
+            var date = new Date();
+            var curDate = null;
+            do { curDate = new Date(); }
+            while(curDate-date < millis);
+        }
+
     </script>
 
     <h2>Modifica film</h2>
-    <form method="POST" action="../backend/editFilmController.php">
+    <form id="form" method="POST" action="../backend/editFilmController.php">
 
         <input type="hidden" name="film" value="<?php echo $_GET['film']?>" />
 
@@ -96,12 +134,7 @@
     
         <div id="registi">
             <button type="button" onclick="addSelectDirector()">Aggiungi Regista</button><br>
-            <?php 
-                $filmDirectors = $connessione->query("SELECT * FROM Registi INNER JOIN Dirige ON Registi.id = Dirige.registi_id WHERE film_id = '" . $_GET['film'] . "'");
-                while ($director = $filmDirectors->fetch_assoc()) {
-                    echo '<script>directorRow("'.$director['nome'].'", "'.$director['cognome'].'")</script>';
-                }
-            ?>
+            <script>directorRow()</script>
         </div>
 
     
