@@ -10,25 +10,36 @@
         ?>
     </head>
     <body>
-    <script>
-        var indexDirector = 1;
+        <script>
+        var indexDirector = 1;  
         var indexActor = 1;
         var indexNewDirector = 1;
         var indexNewActor = 1;
         
         function directorRow() {
-            <?php
-                $indexDirector = 1;
-                
-                $filmDirectors = $connessione->query("SELECT * FROM Registi INNER JOIN Dirige ON Registi.id = Dirige.registi_id WHERE film_id = '" . $_GET['film'] . "'");
-                echo 'console.log("'.$filmDirectors->num_rows.'");';
-                while ($director = $filmDirectors->fetch_assoc()) {
-                    echo 'var p = document.createElement("p");
-                    p.innerHTML = "Regista '.$indexDirector.': '.$director['nome'].' '.$director['cognome'].' <button type=\"button\" onclick=\"removeDirector('.$director['id'].')\">Remove</button>";
-                    document.getElementById("registi").appendChild(p);';
-                    $indexDirector++;
+                indexDirector = 1;
+                var film = <?php echo $_GET['film']?>;
+
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "../backend/apiRead.php", true);
+                xhr.send(JSON.stringify({film: film, type: "director"}));
+
+                xhr.onload = function() {
+                if (this.status == 200 && this.readyState == 4) {
+                    let registi = JSON.parse(this.responseText);
+                    console.log(registi);
+                    if(registi['error'] == true){
+                        console.log(registi['msg']);
+                    }else{
+                        registi.forEach(regista => {
+                            var p = document.createElement("p");
+                            p.innerHTML = "Regista " +indexDirector+ ": " + regista['nome'] + " " + regista['cognome'] + " <button type=\"button\" onclick=\"removeDirector(" + regista['id'] + ")\">Remove</button>";
+                            document.getElementById("registi").appendChild(p);
+                            indexDirector++;
+                        });
+                    }
                 }
-            ?>
+                }
         }
 
         function addSelectDirector() {
@@ -77,17 +88,13 @@
             var director = id;
 
             let xhr = new XMLHttpRequest();
-            xhr.open("POST", "../backend/api.php", true);
-            xhr.send(JSON.stringify({film: film, director: director}));
+            xhr.open("POST", "../backend/apiRemove.php", true);
+            xhr.send(JSON.stringify({film: film, director: director, type: "director"}));
 
             xhr.onload = function() {
                 if (this.status == 200 && this.readyState == 4) {
-                    console.log(this.responseText);
+                    indexDirector--;
                     document.getElementById("registi").innerHTML = "";
-                    //pausecomp(20000);
-                $connessione.close();
-                $connessione = new mysqli($host, $user, $password, $db);
-
                     directorRow();
                 } else {
                     console.log("Errore");
