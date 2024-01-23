@@ -34,7 +34,7 @@
                         registi.forEach(regista => {
                             var p = document.createElement("p");
                             p.innerHTML = "Regista " +indexDirector+ ": " + regista['nome'] + " " + regista['cognome'] + " <button type=\"button\" onclick=\"removeDirector(" + regista['id'] + ")\">Remove</button>";
-                            document.getElementById("registi").appendChild(p);
+                            document.getElementById("regista").appendChild(p);
                             indexDirector++;
                         });
                     }
@@ -94,7 +94,7 @@
             xhr.onload = function() {
                 if (this.status == 200 && this.readyState == 4) {
                     indexDirector--;
-                    document.getElementById("registi").innerHTML = "";
+                    document.getElementById("regista").innerHTML = "";
                     directorRow();
                 } else {
                     console.log("Errore");
@@ -141,7 +141,9 @@
     
         <div id="registi">
             <button type="button" onclick="addSelectDirector()">Aggiungi Regista</button><br>
-            <script>directorRow()</script>
+            <div id="regista">
+                <script>directorRow()</script>
+            </div>
         </div>
 
     
