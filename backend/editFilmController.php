@@ -30,8 +30,8 @@ while(isset($_POST['attore'.$index])){
 
 
 try{
-    $update = "UPDATE Film SET titolo = '$titolo', anno = '$anno', durata = '$durata', genere = '$genere', trama = '$trama', locandina = '$locandina', banner = '$banner' WHERE id = '$film'";
-    if ($connessione->query($update)){
+    $update = "UPDATE Film SET titolo = ?, anno = ?, durata = ?, genere = ?, trama = ?, locandina = ?, banner = ? WHERE id = '$film'";
+    if($connessione->prepare($update)->execute([$titolo, $anno, $durata, $genere, $trama, $locandina, $banner])){
         while($regista = array_pop($registi)){
             $connessione->query("insert into Dirige (registi_id, film_id) values ('$regista', (SELECT id FROM Film WHERE titolo = '$titolo'))");
         }
@@ -41,11 +41,12 @@ try{
         echo "Edit successful!";
         header("Location: ../frontend/film.php?film=".$film."&succ=2");
     }
+    
 }catch(Exception $e)
 {
     $message = $e->getMessage();
     echo $message;
-    header("Location: ../frontend/home.php?error=3");
+    header("Location: ../frontend/film.php?film=".$film."&error=3");
 }
 
 ?>

@@ -27,8 +27,8 @@ while(isset($_POST['attore'.$index])){
 
 
 try{
-    $register = "insert into Film (titolo, anno, durata, genere, trama, locandina, banner) values ('$titolo', '$anno', '$durata', '$genere', '$trama', '$locandina', '$banner')";
-    if ($connessione->query($register)){
+    $register = "insert into Film (titolo, anno, durata, genere, trama, locandina, banner) values (?, ?, ?, ?, ?, ?, ?)";
+    if ($connessione->prepare($register)->execute([$titolo, $anno, $durata, $genere, $trama, $locandina, $banner])){
         while($regista = array_pop($registi)){
             $connessione->query("insert into Dirige (registi_id, film_id) values ('$regista', (SELECT id FROM Film WHERE titolo = '$titolo'))");
         }

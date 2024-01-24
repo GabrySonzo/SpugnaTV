@@ -7,9 +7,10 @@ $cognome = $_POST['cognome'];
 $foto = $_POST['foto'];
 
 try{
-    $register = "insert into Attori (nome, cognome, foto) values ('$nome', '$cognome', '$foto')";
+    $register = "insert into Attori (nome, cognome, foto) values (?, ?, ?)";
+
     
-    if ($connessione->query($register)){
+    if ($connessione->prepare($register)->execute([$nome, $cognome, $foto])){
         echo "Registration successful!";
         header("Location: ../frontend/home.php?succ=3");
     }

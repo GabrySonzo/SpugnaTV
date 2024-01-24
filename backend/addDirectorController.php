@@ -20,9 +20,9 @@ $foto = $_POST['foto'];
 echo $morte;
 
 try{
-    $register = "insert into Registi (nome, cognome, data_nascita, data_morte, descrizione, foto) values ('$nome', '$cognome', '$nascita', '$morte', '$descrizione', '$foto')";
+    $register = "insert into Registi (nome, cognome, data_nascita, data_morte, descrizione, foto) values (?, ?, ?, ?, ?, ?)";
 
-    if ($connessione->query($register)){
+    if ($connessione->prepare($register)->execute([$nome, $cognome, $nascita, $morte, $descrizione, $foto])){
         echo "Registration successful!";
         header("Location: ../frontend/home.php?succ=2");
     }

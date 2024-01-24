@@ -17,7 +17,7 @@
     <p><?php echo $film['genere'] ?></p>
     <p><?php echo $film['trama'] ?></p>
     <div>
-        Registi:
+        Diretto da:
         <?php
             while ($director = $directors->fetch_assoc()) {
                 echo "<a href='director.php?director=".$director['id']."'><p>- " . $director['nome'] ." ".$director['cognome'] . "</p></a>";
@@ -25,7 +25,7 @@
         ?>
     </div>
     <div>
-        Attori:
+        Cast:
         <?php
             while ($actor = $actors->fetch_assoc()) {
                 echo "<p>- " . $actor['nome'] ." ".$actor['cognome'] . "</p>";

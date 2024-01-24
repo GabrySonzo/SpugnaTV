@@ -24,6 +24,8 @@ if(isset($data['type']) && $data['type'] == "director"){
         //execute query
         if ($connessione->query($remove)) {
             //echo "Remove successful!";
+            $json = json_encode(array("error" => false, "msg" => "Remove successful!"));
+            echo $json;
         } else {
             $json = json_encode(array("error" => true, "msg" => "Query error"));
             echo $json;
@@ -43,12 +45,7 @@ if(isset($data['type']) && $data['type'] == "director"){
         //execute query
         if ($connessione->query($remove)) {
             //echo "Remove successful!";
-            $filmActors = $connessione->query("SELECT * FROM Attori INNER JOIN Recita ON Attori.id = Recita.attori_id WHERE film_id = '" . $film . "'");
-            $ret = array();
-            while ($row = $filmActors->fetch_assoc()) {
-                $ret[] = $row;
-            }
-            $json = json_encode($ret);
+            $json = json_encode(array("error" => false, "msg" => "Remove successful!"));
             echo $json;
         } else {
             $json = json_encode(array("error" => true, "msg" => "Query error"));
@@ -58,4 +55,7 @@ if(isset($data['type']) && $data['type'] == "director"){
         $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
         echo $json;
     }
+}else{
+    $json = json_encode(array("error" => true, "msg" => "Missing type parameter"));
+    echo $json;
 }

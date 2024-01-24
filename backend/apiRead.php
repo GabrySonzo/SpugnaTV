@@ -22,4 +22,20 @@ if(isset($data['type']) && $data['type'] == "director"){
         $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
         echo $json;
     }    
+}else if(isset($data['type']) && $data['type'] == "actor"){
+    if (isset($data['film'])){
+        $actors = $connessione->query("SELECT * FROM Attori INNER JOIN Recita ON Attori.id = Recita.attori_id WHERE film_id = '" . $data['film'] . "'");
+        $ret = array();
+        while ($row = $actors->fetch_assoc()) {
+            $ret[] = $row;
+        }
+        $json = json_encode($ret);
+        echo $json;
+    } else {
+        $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
+        echo $json;
+    }
+}else{
+    $json = json_encode(array("error" => true, "msg" => "Missing type parameter"));
+    echo $json;
 }

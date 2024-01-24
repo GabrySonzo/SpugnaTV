@@ -17,29 +17,28 @@
         var indexNewActor = 1;
         
         function directorRow() {
-                indexDirector = 1;
-                var film = <?php echo $_GET['film']?>;
+            indexDirector = 1;
+            var film = <?php echo $_GET['film']?>;
 
-                let xhr = new XMLHttpRequest();
-                xhr.open("POST", "../backend/apiRead.php", true);
-                xhr.send(JSON.stringify({film: film, type: "director"}));
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../backend/apiRead.php", true);
+            xhr.send(JSON.stringify({film: film, type: "director"}));
 
-                xhr.onload = function() {
-                if (this.status == 200 && this.readyState == 4) {
-                    let registi = JSON.parse(this.responseText);
-                    console.log(registi);
-                    if(registi['error'] == true){
-                        console.log(registi['msg']);
-                    }else{
-                        registi.forEach(regista => {
-                            var p = document.createElement("p");
-                            p.innerHTML = "Regista " +indexDirector+ ": " + regista['nome'] + " " + regista['cognome'] + " <button type=\"button\" onclick=\"removeDirector(" + regista['id'] + ")\">Remove</button>";
-                            document.getElementById("regista").appendChild(p);
-                            indexDirector++;
-                        });
-                    }
+            xhr.onload = function() {
+            if (this.status == 200 && this.readyState == 4) {
+                let registi = JSON.parse(this.responseText);
+                if(registi['error'] == true){
+                    console.log(registi['msg']);
+                }else{
+                    registi.forEach(regista => {
+                        var p = document.createElement("p");
+                        p.innerHTML = "Regista " +indexDirector+ ": " + regista['nome'] + " " + regista['cognome'] + " <button type=\"button\" onclick=\"removeDirector(" + regista['id'] + ")\">Remove</button>";
+                        document.getElementById("regista").appendChild(p);
+                        indexDirector++;
+                    });
                 }
-                }
+            }
+            }
         }
 
         function addSelectDirector() {
@@ -59,11 +58,29 @@
             indexNewDirector++;
         }
 
-        function actorRow(nome, cognome) {
-            var p = document.createElement("p");
-            p.innerHTML = "Attore "+ indexActor +": "+ nome + " " + cognome;
-            document.getElementById("attori").appendChild(p);
-            indexActor++;
+        function actorRow() {
+            indexActor = 1;
+            var film = <?php echo $_GET['film']?>;
+
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../backend/apiRead.php", true);
+            xhr.send(JSON.stringify({film: film, type: "actor"}));
+
+            xhr.onload = function() {
+            if (this.status == 200 && this.readyState == 4) {
+                let attori = JSON.parse(this.responseText);
+                if(attori['error'] == true){
+                    console.log(attori['msg']);
+                }else{
+                    attori.forEach(attore => {
+                        var p = document.createElement("p");
+                        p.innerHTML = "Attore " +indexActor+ ": " + attore['nome'] + " " + attore['cognome'] + " <button type=\"button\" onclick=\"removeActor(" + attore['id'] + ")\">Remove</button>";
+                        document.getElementById("attore").appendChild(p);
+                        indexActor++;
+                    });
+                }
+            }
+            }
         }
 
         function addSelectActor() {
@@ -93,21 +110,44 @@
 
             xhr.onload = function() {
                 if (this.status == 200 && this.readyState == 4) {
-                    indexDirector--;
-                    document.getElementById("regista").innerHTML = "";
-                    directorRow();
+                    let response = JSON.parse(this.responseText);
+                    if(response['error'] == true){
+                        console.log(response['msg']);
+                    }else{
+                        indexDirector--;
+                        document.getElementById("regista").innerHTML = "";
+                        directorRow();
+                    }
                 } else {
-                    console.log("Errore");
+                    console.log("Errore nella richiesta api");
                 }
             };
-            
         }
-        function pausecomp(millis)
-        {
-            var date = new Date();
-            var curDate = null;
-            do { curDate = new Date(); }
-            while(curDate-date < millis);
+
+        function removeActor(id){
+            var film = <?php echo $_GET['film']?>;
+            var actor = id;
+            //richiesta all api per rimozione di film da database
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../backend/apiRemove.php", true);
+            xhr.send(JSON.stringify({film: film, actor: actor, type: "actor"}));
+
+            xhr.onload = function() {
+                //controllo che la richiesta sia andata a buon fine
+                if (this.status == 200 && this.readyState == 4) {
+                    //modifiche al dom
+                    let response = JSON.parse(this.responseText);
+                    if(response['error'] == true){
+                        console.log(response['msg']);
+                    }else{
+                        indexActor--;
+                        document.getElementById("attore").innerHTML = "";
+                        actorRow();
+                    }
+                } else {
+                    console.log("Errore nella richiesta api");
+                }
+            };
         }
 
     </script>
@@ -149,12 +189,9 @@
     
         <div id="attori">
             <button type="button" onclick="addSelectActor()">Aggiungi Attore</button><br>
-            <?php 
-                $filmActors = $connessione->query("SELECT * FROM Attori INNER JOIN Recita ON Attori.id = Recita.attori_id WHERE film_id = '" . $_GET['film'] . "'");
-                while ($actor = $filmActors->fetch_assoc()) {
-                    echo '<script>actorRow("'.$actor['nome'].'", "'.$actor['cognome'].'")</script>';
-                }
-            ?>
+            <div id="attore">
+                <script>actorRow()</script>
+            </div>
         </div>
 
 

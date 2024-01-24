@@ -21,9 +21,9 @@ $foto = $_POST['foto'];
 echo $morte;
 
 try{
-    $update = "UPDATE Registi SET nome = '$nome', cognome = '$cognome', data_nascita = '$nascita', data_morte = '$morte', descrizione = '$descrizione', foto = '$foto' WHERE id = '$director'";
+    $update = "UPDATE Registi SET nome = ?, cognome = ?, data_nascita = ?, data_morte = ?, descrizione = ?, foto = ? WHERE id = '$director'";
 
-    if ($connessione->query($update)){
+    if ($connessione->prepare($update)->execute([$nome, $cognome, $nascita, $morte, $descrizione, $foto])){
         echo "Edit successful!";
         header("Location: ../frontend/director.php?director=".$director."&succ=1");
     }

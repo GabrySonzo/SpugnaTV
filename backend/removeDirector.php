@@ -3,8 +3,8 @@
 
     $director = $_GET['director'];
 
-    $remove = "DELETE FROM Registi WHERE id = '". $director ."'";
-    if($connessione->query($remove)){
+    $remove = "DELETE FROM Registi WHERE id = ?";
+    if($connessione->prepare($remove)->execute([$director])){
         header("Location: ../frontend/home.php?succ=4");
     }else{
         header("Location: ../frontend/director.php?director=". $film . "&error=2");

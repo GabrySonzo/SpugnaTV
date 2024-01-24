@@ -7,7 +7,8 @@ $list = $_GET['lista'];
 $film = $_GET['film'];
 
 try{
-    if($connessione->query("INSERT INTO Comprende (lista_id, film_id) VALUES ('" . $list . "', '" . $film . "')")){
+    $register = "insert into Comprende (lista_id, film_id) values (?, ?)";
+    if($connessione->prepare($register)->execute([$list, $film])){
         header("Location: ../frontend/film.php?film=". $film . "&succ=1");
     }
     

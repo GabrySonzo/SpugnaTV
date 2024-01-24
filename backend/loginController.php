@@ -8,8 +8,8 @@ $password = $_POST['password'];
 $password = md5($password);
 
 try {
-    $query = "SELECT * FROM Utenti WHERE email = '$email' AND password = '$password'";
-    $result = $connessione->query($query);
+    $query = "SELECT * FROM Utenti WHERE email = ? AND password = ?";
+    $result = $connessione->prepare($query)->execute([$email, $password]);
 
     if ($result->num_rows > 0) {
         // User found
