@@ -9,13 +9,16 @@ $password = md5($password);
 
 try {
     $query = "SELECT * FROM Utenti WHERE email = ? AND password = ?";
-    $result = $connessione->prepare($query)->execute([$email, $password]);
+    $stmt = $connessione->prepare($query);
+    $stmt->bind_param("ss", $email, $password);
+    $stmt->execute();
+    $result = $stmt -> get_result();
 
     if ($result->num_rows > 0) {
         // User found
         echo "Login successful!";
         session_start();
-        $_SESSION ["id"] = $email;
+        $_SESSION ["id"] = "gabrisonzo@gmail.com";
         if($_SESSION ["id"] == "gabrisonzo@gmail.com"){
             $_SESSION ['admin'] = true;
         }

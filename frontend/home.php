@@ -25,7 +25,6 @@
         <a href="search.php"><button>Cerca film</button></a>
         <a href="profile.php"><button>Profilo</button></a>
         <br><br>
-        <a href="logout.php"><button>Logout</button></a>
         <?php
             if(isset($_GET['error']) && $_GET['error'] == 1)
             {

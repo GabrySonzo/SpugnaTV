@@ -16,10 +16,10 @@ if(isset($data['type']) && $data['type'] == "director"){
         while ($row = $directors->fetch_assoc()) {
             $ret[] = $row;
         }
-        $json = json_encode($ret);
+        $json = json_encode(array("error" => false, "msg" => "Query succesfull", "data" => $ret));
         echo $json;
     } else {
-        $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
+        $json = json_encode(array("error" => true, "msg" => "Missing parameters", "data" => null));
         echo $json;
     }    
 }else if(isset($data['type']) && $data['type'] == "actor"){
@@ -29,13 +29,13 @@ if(isset($data['type']) && $data['type'] == "director"){
         while ($row = $actors->fetch_assoc()) {
             $ret[] = $row;
         }
-        $json = json_encode($ret);
+        $json = json_encode(array("error" => false, "msg" => "Query succesfull", "data" => $ret));
         echo $json;
     } else {
-        $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
+        $json = json_encode(array("error" => true, "msg" => "Missing parameters", "data" => null));
         echo $json;
     }
 }else{
-    $json = json_encode(array("error" => true, "msg" => "Missing type parameter"));
+    $json = json_encode(array("error" => true, "msg" => "Missing type parameter", "data" => null));
     echo $json;
 }

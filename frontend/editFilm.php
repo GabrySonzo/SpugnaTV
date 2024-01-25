@@ -30,7 +30,7 @@
                 if(registi['error'] == true){
                     console.log(registi['msg']);
                 }else{
-                    registi.forEach(regista => {
+                    registi["data"].forEach(regista => {
                         var p = document.createElement("p");
                         p.innerHTML = "Regista " +indexDirector+ ": " + regista['nome'] + " " + regista['cognome'] + " <button type=\"button\" onclick=\"removeDirector(" + regista['id'] + ")\">Remove</button>";
                         document.getElementById("regista").appendChild(p);
@@ -72,7 +72,7 @@
                 if(attori['error'] == true){
                     console.log(attori['msg']);
                 }else{
-                    attori.forEach(attore => {
+                    attori["data"].forEach(attore => {
                         var p = document.createElement("p");
                         p.innerHTML = "Attore " +indexActor+ ": " + attore['nome'] + " " + attore['cognome'] + " <button type=\"button\" onclick=\"removeActor(" + attore['id'] + ")\">Remove</button>";
                         document.getElementById("attore").appendChild(p);
