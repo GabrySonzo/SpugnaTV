@@ -17,6 +17,8 @@
             <a href="registerFilm.php"><button>inserisci film</button></a>
             <a href="registerDirector.php"><button>inserisci regista</button></a>
             <a href="registerActor.php"><button>inserisci attore</button></a>
+            <a href="actors.php"><button>visualizza attori</button></a>
+            <a href="profiles.php"><button>visualizza profili</button></a>
             <br><br>
         <?php endif; ?>
         <?php

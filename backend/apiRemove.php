@@ -13,49 +13,70 @@ $jsonData = file_get_contents('php://input');
 $data = json_decode($jsonData, true);
 
 // Check if the required parameters exist
-if(isset($data['type']) && $data['type'] == "director"){
-    if (isset($data['film']) && isset($data['director'])) {
-        $film = $data['film'];
-        $director = $data['director'];
+
+if(isset($data['type'])){
+    if($data['type'] == "director"){
+        if (isset($data['film']) && isset($data['director'])) {
+            $film = $data['film'];
+            $director = $data['director'];
+            
+            $query = "DELETE FROM Dirige WHERE film_id = '$film' AND registi_id = '$director'";
+            $ok = true;
+
+        } else {
+            $ok = false;
+        }
     
-        //query
-        $remove = "DELETE FROM Dirige WHERE film_id = '$film' AND registi_id = '$director'";
-    
-        //execute query
-        if ($connessione->query($remove)) {
-            //echo "Remove successful!";
-            $json = json_encode(array("error" => false, "msg" => "Remove successful!"));
+    }else if($data['type'] == "actor"){
+        if (isset($data['film']) && isset($data['actor'])) {
+            $film = $data['film'];
+            $actor = $data['actor'];
+        
+            $query = "DELETE FROM Recita WHERE film_id = '$film' AND attori_id = '$actor'";
+            $ok = true;
+
+        } else {
+            $ok = false;
+        }
+
+    }else if($data['type'] == "allActors"){
+        if (isset($data['actor'])) {
+            $actor = $data['actor'];
+        
+            $query = "DELETE FROM Attori WHERE id = '$actor'";
+            $ok = true;
+
+        } else {
+            $ok = false;
+        }
+
+    }else if($data['type'] == "profiles"){
+        if (isset($data['profile'])) {
+            $profile = $data['profile'];
+        
+            $query = "DELETE FROM Utenti WHERE email = '$profile'";
+            $ok = true;
+
+        } else {
+            $ok = false;
+        }
+    }
+
+    if($ok){
+        if ($connessione->query($query)) {
+            
+            $json = json_encode(array("error" => false, "msg" => "Remove successful!", "data" => null));
             echo $json;
         } else {
-            $json = json_encode(array("error" => true, "msg" => "Query error"));
+            $json = json_encode(array("error" => true, "msg" => "Query error", "data" => null));
             echo $json;
         }
-    } else {
-        $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
+    }else{
+        $json = json_encode(array("error" => true, "msg" => "Missing parameters", "data" => null));
         echo $json;
     }
-}else if(isset($data['type']) && $data['type'] == "actor"){
-    if (isset($data['film']) && isset($data['actor'])) {
-        $film = $data['film'];
-        $actor = $data['actor'];
-    
-        //query
-        $remove = "DELETE FROM Recita WHERE film_id = '$film' AND attori_id = '$actor'";
-    
-        //execute query
-        if ($connessione->query($remove)) {
-            //echo "Remove successful!";
-            $json = json_encode(array("error" => false, "msg" => "Remove successful!"));
-            echo $json;
-        } else {
-            $json = json_encode(array("error" => true, "msg" => "Query error"));
-            echo $json;
-        }
-    } else {
-        $json = json_encode(array("error" => true, "msg" => "Missing parameters"));
-        echo $json;
-    }
-}else{
-    $json = json_encode(array("error" => true, "msg" => "Missing type parameter"));
+}
+else{
+    $json = json_encode(array("error" => true, "msg" => "Missing type parameter", "data" => null));
     echo $json;
 }

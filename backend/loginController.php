@@ -15,10 +15,10 @@ try {
     $result = $stmt -> get_result();
 
     if ($result->num_rows > 0) {
-        // User found
+        
         echo "Login successful!";
         session_start();
-        $_SESSION ["id"] = "gabrisonzo@gmail.com";
+        $_SESSION ["id"] = $email;
         if($_SESSION ["id"] == "gabrisonzo@gmail.com"){
             $_SESSION ['admin'] = true;
         }
