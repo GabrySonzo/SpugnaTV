@@ -12,9 +12,6 @@
     $lists = $connessione->query("SELECT * FROM Liste WHERE utente_mail = '" . $_SESSION['id'] . "'");
 ?>
 <body>
-    <?php
-        echo $film;
-    ?>
     <h1><?php echo $film['titolo'] ?></h1>
     <p><?php echo $film['anno']." - ". intval(intval($film['durata'])/60) ."h ". intval($film['durata'])%60 ."min" ?></p>
     <p><?php echo $film['genere'] ?></p>

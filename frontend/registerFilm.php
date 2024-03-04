@@ -18,6 +18,7 @@
             selectContainer.innerHTML = `
             <label for="regista">Regista `+indexDirector+`:</label>
             <select id="regista`+indexDirector+`" name="regista`+indexDirector+`">
+                <option value=null> -- scegli il regista -- </option>
                 <?php
                 while ($director = $directors->fetch_assoc()) {
                     echo "<option value='" . $director['id'] . "'>" . $director['nome'] ." ".$director['cognome'] . "</option>";
@@ -34,6 +35,7 @@
             selectContainer.innerHTML = `
             <label for="attore">Attore `+indexActor+`:</label>
             <select id="attore`+indexActor+`" name="attore`+indexActor+`">
+            <option value=null> -- scegli l'attore -- </option>
                 <?php
                 while ($actor = $actors->fetch_assoc()) {
                     echo "<option value='" . $actor['id'] . "'>" . $actor['nome'] ." ".$actor['cognome'] . "</option>";
@@ -43,6 +45,17 @@
             `;
             document.getElementById("attori").appendChild(selectContainer);
             indexActor++;
+        }
+
+        function checkSubmit(){
+            var regista = document.getElementById("regista1");
+            var attore = document.getElementById("attore1");
+            if(regista.value == "null" || attore.value == "null"){
+                alert("Seleziona almeno un regista e un attore");
+            }else{
+                document.querySelector("form").submit();
+            }
+
         }
 
     </script>

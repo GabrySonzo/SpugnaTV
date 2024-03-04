@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Actors Page</title>
+    <title>Profiles Page</title>
 </head>
 <?php
     include '../backend/connessione.php';
@@ -50,7 +50,7 @@
         }
 
     </script>
-    <h1>Attori</h1>
+    <h1>Profili</h1>
     <div id="profiles">
         <script>showProfile();</script>
 

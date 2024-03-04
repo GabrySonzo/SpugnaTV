@@ -15,11 +15,9 @@
         <div>
             <p>Cerca per:</p>
             <input type="radio" id="film" name="filter" value="film" checked/>
-            <label for="film">Titolo</label>
+            <label for="film">Film</label>
             <input type="radio" id="director" name="filter" value="director" />
             <label for="director">Regista</label>
-            <input type="radio" id="actor" name="filter" value="actor" />
-            <label for="actor">Attore</label>
         </div>
         <br>
         <input type="text" name="search" placeholder="Cerca">
@@ -27,28 +25,44 @@
     </form>
     
     <?php
-        if (isset($_GET['search']) && isset($_GET['filter']) && $_GET['search'] != "" && $_GET['filter'] != ""){
+        if (isset($_GET['search']) && isset($_GET['filter']) && $_GET['search'] != "" && ($_GET['filter'] == "film" || $_GET['filter'] == "director")){
             
             $searchQuery = $_GET['search'];
             $filter = $_GET['filter'];
 
             if($filter == "director"){
-                $query = "SELECT * FROM Film INNER JOIN Dirige ON Film.id = Dirige.film_id INNER JOIN Registi ON Dirige.registi_id = Registi.id WHERE Registi.nome LIKE  ?  OR Registi.cognome LIKE  ? ";
-                $results = $connessione->prepare($query)->execute([$searchQuery, $searchQuery]);
-            }
-            else if($filter == "actor"){
-                $query = "SELECT * FROM Film INNER JOIN Recita ON Film.id = Recita.film_id INNER JOIN Attori ON Recita.attori_id = Attori.id WHERE Attori.nome LIKE '% ? %' OR Attori.cognome LIKE '% ? %'";
-                $results = $connessione->prepare($query)->execute([$searchQuery, $searchQuery]);
+                $query = "SELECT * FROM Registi WHERE nome LIKE ? OR cognome LIKE ?";
             }
             else if($filter == "film"){
-                $query = "SELECT * FROM Film WHERE titolo LIKE '%?%'";
-                $results = $connessione->prepare($query)->execute([$searchQuery]);
+                $query = "SELECT * FROM Film WHERE titolo LIKE ?";
             }
             
-            echo "<h2>Risultati ricerca</h2>";
+            $stmt = $connessione->prepare($query);
+            $searchQuery = "%".$searchQuery."%";
+            if($filter == "director"){
+                $stmt->bind_param("ss",$searchQuery, $searchQuery);
+            }else if($filter == "film"){
+                $stmt->bind_param("s", $searchQuery);
+            }
+            $stmt->execute();
+            $results = $stmt -> get_result();
             
-            foreach ($results as $result) {
-                echo "<a href='film.php?film=".$result['Film.id']."'><p>{$result['film.titolo']}{$result['id']}</p></a>";
+            if($results->num_rows){
+                echo "<h2>Risultati ricerca</h2>";
+                if($filter == "director"){
+                    foreach ($results as $result) {
+                        echo "<a href='director.php?director=".$result['id']."'><p>{$result['nome']} {$result['cognome']}</p></a>";
+                    }
+                }
+                else if($filter == "film"){
+                    foreach ($results as $result) {
+                        echo "<a href='film.php?film=".$result['id']."'><p>{$result['titolo']}</p></a>";
+                    }    
+                }
+                
+            }
+            else{
+                echo "<p>Nessun risultato trovato</p>";
             }
         }
         else {
