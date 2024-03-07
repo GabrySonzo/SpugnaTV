@@ -33,10 +33,14 @@ try{
     $update = "UPDATE Film SET titolo = ?, anno = ?, durata = ?, genere = ?, trama = ?, locandina = ?, banner = ? WHERE id = '$film'";
     if($connessione->prepare($update)->execute([$titolo, $anno, $durata, $genere, $trama, $locandina, $banner])){
         while($regista = array_pop($registi)){
-            $connessione->query("insert into Dirige (registi_id, film_id) values ('$regista', (SELECT id FROM Film WHERE titolo = '$titolo'))");
+            if($regista != 'null'){
+                $connessione->query("insert into Dirige (registi_id, film_id) values ('$regista', (SELECT id FROM Film WHERE titolo = '$titolo'))");
+            }
         }
         while($attore = array_pop($attori)){
-            $connessione->query("insert into Recita (attori_id, film_id) values ('$attore', (SELECT id FROM Film WHERE titolo = '$titolo'))");
+            if($attore != 'null'){
+                $connessione->query("insert into Recita (attori_id, film_id) values ('$attore', (SELECT id FROM Film WHERE titolo = '$titolo'))");
+            }
         }
         echo "Edit successful!";
         header("Location: ../frontend/film.php?film=".$film."&succ=2");

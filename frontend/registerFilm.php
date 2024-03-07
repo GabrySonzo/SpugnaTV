@@ -47,22 +47,11 @@
             indexActor++;
         }
 
-        function checkSubmit(){
-            var regista = document.getElementById("regista1");
-            var attore = document.getElementById("attore1");
-            if(regista.value == "null" || attore.value == "null"){
-                alert("Seleziona almeno un regista e un attore");
-            }else{
-                document.querySelector("form").submit();
-            }
-
-        }
 
     </script>
 
     <h2>Registra film</h2>
     <form method="POST" action="../backend/addFilmController.php">
-
         <label for="titolo">Titolo:</label>
         <input type="text" id="titolo" name="titolo" required><br><br>
         

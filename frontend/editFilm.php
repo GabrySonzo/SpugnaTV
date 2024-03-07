@@ -46,7 +46,8 @@
             selectContainer.innerHTML = `
             <label for="regista">Regista `+indexDirector+`:</label>
             <select id="regista`+indexNewDirector+`" name="regista`+indexNewDirector+`">
-                <?php
+            <option value=null> -- scegli il regista -- </option>
+            <?php
                 while ($director = $directors->fetch_assoc()) {
                     echo "<option value='" . $director['id'] . "'>" . $director['nome'] ." ".$director['cognome'] . "</option>";
                 }
@@ -88,6 +89,7 @@
             selectContainer.innerHTML = `
             <label for="attore">Attore `+indexActor+`:</label>
             <select id="attore`+indexNewActor+`" name="attore`+indexNewActor+`">
+            <option value=null> -- scegli l'attore -- </option>
                 <?php
                 while ($actor = $actors->fetch_assoc()) {
                     echo "<option value='" . $actor['id'] . "'>" . $actor['nome'] ." ".$actor['cognome'] . "</option>";

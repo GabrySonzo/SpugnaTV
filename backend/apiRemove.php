@@ -12,7 +12,8 @@ $jsonData = file_get_contents('php://input');
 // Decode the JSON data into a PHP associative array
 $data = json_decode($jsonData, true);
 
-// Check if the required parameters exist
+$rmListe = false;
+$rmRecita = false;
 
 if(isset($data['type'])){
     if($data['type'] == "director"){
@@ -69,12 +70,12 @@ if(isset($data['type'])){
     if($ok){
         if ($connessione->query($query)) {
             
-            /*if($rmRecita){
+            if($rmRecita){
                 $connessione->query("DELETE FROM Recita WHERE attori_id = '$actor'");
             }
             if($rmListe){
                 $connessione->query("DELETE FROM Liste WHERE utente_mail = '$profile'");
-            }*/
+            }
 
             $json = json_encode(array("error" => false, "msg" => "Remove successful!", "data" => null));
             echo $json;
