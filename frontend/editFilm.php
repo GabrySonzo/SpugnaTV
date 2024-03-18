@@ -155,8 +155,10 @@
     </script>
 
     <h2>Modifica film</h2>
-    <form id="form" method="POST" action="../backend/editFilmController.php">
+    <form id="form" method="POST" action="../backend/addFilmController.php">
 
+        <input type="hidden" name="edit" value="true" />
+        
         <input type="hidden" name="film" value="<?php echo $_GET['film']?>" />
 
         <label for="titolo">Titolo:</label>

@@ -15,7 +15,7 @@ else{
     try{
         $register = "INSERT into Utenti (email,username,password) values (?, ?, ?)";
     
-        if ($connessione->prepare($register)->execute([$email, $username, $password])){
+        if ($connessione->prepare($register)->execute([$email, $username, $password])){ 
             $connessione->prepare("INSERT into Liste (nome, utente_mail) values ('Film visti', ?)")->execute([$email]);
             $connessione->prepare("INSERT into Liste (nome, utente_mail) values ('Film da vedere', ?)")->execute([$email]);
             echo "Registration successful!";

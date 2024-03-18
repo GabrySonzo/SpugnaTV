@@ -1,0 +1,8 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-f
+
+#api rewrite route
+RewriteRule ^api/(.*)$ api.php/$1 [QSA,NC,L]
+
+#http://localhost/www/SpugnaTV/api
