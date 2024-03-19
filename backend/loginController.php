@@ -19,7 +19,7 @@ try {
         echo "Login successful!";
         session_start();
         $_SESSION ["id"] = $email;
-        if($_SESSION ["id"] == "gabrisonzo@gmail.com"){
+        if($result->fetch_assoc() ["ruolo"] == "admin"){
             $_SESSION ['admin'] = true;
         }
         else{

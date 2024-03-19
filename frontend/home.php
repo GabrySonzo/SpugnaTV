@@ -5,7 +5,7 @@
         header("Location: login.php");
     }
 
-    $daVedere = $connessione->query("SELECT id FROM Liste WHERE nome = 'Film da vedere' AND utente_mail = '" . $_SESSION['id'] . "'")->fetch_assoc()['id'];
+    $daVedere = $connessione->query("SELECT id FROM Liste WHERE tipo = 'tosee' AND utente_mail = '" . $_SESSION['id'] . "'")->fetch_assoc()['id'];
 
 ?>
 <html>
@@ -24,7 +24,7 @@
         <?php
             echo "<a href='list.php?list=".$daVedere."'><button>Da vedere</button></a>";
         ?>
-        <a href="search.php"><button>Cerca film</button></a>
+        <a href="search.php"><button>Pagina di ricerca</button></a>
         <a href="profile.php"><button>Profilo</button></a>
         <br><br>
         <?php

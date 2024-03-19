@@ -4,8 +4,8 @@
         <title>Register film Page</title>
         <?php
         include '../backend/connessione.php';
-        $directors = $connessione->query("SELECT * FROM Registi");
-        $actors = $connessione->query("SELECT * FROM Attori");
+        $directors = $connessione->query("SELECT * FROM Registi order by nome");
+        $actors = $connessione->query("SELECT * FROM Attori order by nome");
         ?>
     </head>
     <body>

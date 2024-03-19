@@ -30,6 +30,13 @@ if(isset($data['type'])){
     }else if($data['type'] == "profiles"){
         $query = "SELECT * FROM Utenti";
         $ok = true;
+    }else if($data['type'] == "listFilm"){
+        if(isset($data['list'])){
+            $query = "SELECT * FROM Film INNER JOIN Comprende ON Film.id = Comprende.film_id WHERE lista_id = '" . $data['list'] . "'";
+            $ok = true;
+        } else {
+            $ok = false;
+        }
     }
 
     if($ok){

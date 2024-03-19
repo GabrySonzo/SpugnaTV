@@ -9,9 +9,11 @@
 </head>
 <body>
     <h2>Modifica regista</h2>
-    <form method="POST" action="../backend/editDirectorController.php">
+    <form method="POST" action="../backend/addDirectorController.php">
 
         <input type="hidden" name="director" value="<?php echo $_GET['director']?>" />
+
+        <input type="hidden" name="edit" value="true" />
 
         <label for="nome">Nome:</label>
         <input type="text" id="nome" name="nome" value="<?php echo $director['nome'] ?>" required><br><br>

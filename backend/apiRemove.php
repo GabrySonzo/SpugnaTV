@@ -65,6 +65,18 @@ if(isset($data['type'])){
         } else {
             $ok = false;
         }
+
+    }else if($data['type'] == "listFilm"){
+        if(isset($data['list']) && isset($data['film'])){
+            $list = $data['list'];
+            $film = $data['film'];
+        
+            $query = "DELETE FROM Comprende WHERE lista_id = '$list' AND film_id = '$film'";
+            $ok = true;
+
+        } else {
+            $ok = false;
+        }
     }
 
     if($ok){

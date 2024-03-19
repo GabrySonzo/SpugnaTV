@@ -13,11 +13,11 @@ if($password != $password2){
 else{
     $password = md5($password);
     try{
-        $register = "INSERT into Utenti (email,username,password) values (?, ?, ?)";
+        $register = "INSERT into Utenti (email,username,password,ruolo) values (?, ?, ?, 'user')";
     
         if ($connessione->prepare($register)->execute([$email, $username, $password])){ 
-            $connessione->prepare("INSERT into Liste (nome, utente_mail) values ('Film visti', ?)")->execute([$email]);
-            $connessione->prepare("INSERT into Liste (nome, utente_mail) values ('Film da vedere', ?)")->execute([$email]);
+            $connessione->prepare("INSERT into Liste (nome, tipo, utente_mail) values ('Film visti', 'seen', ?)")->execute([$email]);
+            $connessione->prepare("INSERT into Liste (nome, tipo, utente_mail) values ('Film da vedere', 'tosee', ?)")->execute([$email]);
             echo "Registration successful!";
             header("Location: ../frontend/login.php");
         }

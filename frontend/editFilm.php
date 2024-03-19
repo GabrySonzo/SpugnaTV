@@ -4,8 +4,8 @@
         <title>Edit film Page</title>
         <?php
         include '../backend/connessione.php';
-        $directors = $connessione->query("SELECT * FROM Registi");
-        $actors = $connessione->query("SELECT * FROM Attori");
+        $directors = $connessione->query("SELECT * FROM Registi ORDER BY nome");
+        $actors = $connessione->query("SELECT * FROM Attori ORDER BY nome");
         $film = $connessione -> query("SELECT * FROM Film WHERE id = '" . $_GET['film'] . "'") -> fetch_assoc();
         ?>
     </head>
