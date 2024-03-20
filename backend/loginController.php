@@ -32,6 +32,7 @@ try {
     }
 } catch (Exception $e) {
     $message = $e->getMessage();
+    echo $message;
     header("Location: ../frontend/login.php?error=2");
 }
 

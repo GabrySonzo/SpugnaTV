@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Creato il: Mar 19, 2024 alle 10:44
--- Versione del server: 10.4.25-MariaDB
--- Versione PHP: 8.1.10
+-- Host: localhost
+-- Creato il: Mar 20, 2024 alle 12:21
+-- Versione del server: 10.4.28-MariaDB
+-- Versione PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,21 +24,21 @@ USE `SpugnaTV`;
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `attori`
+-- Struttura della tabella `Attori`
 --
 
-CREATE TABLE `attori` (
+CREATE TABLE `Attori` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
   `cognome` varchar(255) NOT NULL,
   `foto` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `attori`
+-- Dump dei dati per la tabella `Attori`
 --
 
-INSERT INTO `attori` (`id`, `nome`, `cognome`, `foto`) VALUES
+INSERT INTO `Attori` (`id`, `nome`, `cognome`, `foto`) VALUES
 (1, 'Elijah ', 'Wood', ''),
 (2, 'Bread', 'Pitt', ''),
 (3, 'Leonardo', 'Di Caprio', '');
@@ -46,37 +46,37 @@ INSERT INTO `attori` (`id`, `nome`, `cognome`, `foto`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `comprende`
+-- Struttura della tabella `Comprende`
 --
 
-CREATE TABLE `comprende` (
+CREATE TABLE `Comprende` (
   `lista_id` int(11) NOT NULL,
   `film_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `comprende`
+-- Dump dei dati per la tabella `Comprende`
 --
 
-INSERT INTO `comprende` (`lista_id`, `film_id`) VALUES
+INSERT INTO `Comprende` (`lista_id`, `film_id`) VALUES
 (2, 4);
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `dirige`
+-- Struttura della tabella `Dirige`
 --
 
-CREATE TABLE `dirige` (
+CREATE TABLE `Dirige` (
   `film_id` int(11) NOT NULL,
   `registi_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `dirige`
+-- Dump dei dati per la tabella `Dirige`
 --
 
-INSERT INTO `dirige` (`film_id`, `registi_id`) VALUES
+INSERT INTO `Dirige` (`film_id`, `registi_id`) VALUES
 (1, 2),
 (3, 1),
 (4, 1);
@@ -84,10 +84,10 @@ INSERT INTO `dirige` (`film_id`, `registi_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `film`
+-- Struttura della tabella `Film`
 --
 
-CREATE TABLE `film` (
+CREATE TABLE `Film` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `titolo` varchar(1000) NOT NULL,
   `anno` int(11) NOT NULL,
@@ -96,13 +96,13 @@ CREATE TABLE `film` (
   `trama` varchar(10000) DEFAULT NULL,
   `locandina` varchar(255) DEFAULT NULL,
   `banner` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `film`
+-- Dump dei dati per la tabella `Film`
 --
 
-INSERT INTO `film` (`id`, `titolo`, `anno`, `durata`, `genere`, `trama`, `locandina`, `banner`) VALUES
+INSERT INTO `Film` (`id`, `titolo`, `anno`, `durata`, `genere`, `trama`, `locandina`, `banner`) VALUES
 (1, 'Il Signore degli Anelli', 2001, 178, 'Fantasy', 'Un mite Hobbit ', '', ''),
 (3, 'Bastardi Senza Gloria', 2009, 153, 'Guerra - Drammatico', 'Nella Francia occupata dai nazisti durante la seconda guerra mondiale, un progetto per assassinare i leader nazisti da parte di un gruppo di soldati ebrei americani coincide con i stessi piani vendicativi della proprietaria di un cinema', '', ''),
 (4, 'Cera una volta... a Hollywood', 2019, 169, 'Commedia', 'un attore televisivo e la sua controfigura intraprendono un\'odissea per affermarsi nell\'industria cinematografica nella Los Angeles del 1969, segnata dagli omicidi di Charles Manson.', '', '');
@@ -110,21 +110,21 @@ INSERT INTO `film` (`id`, `titolo`, `anno`, `durata`, `genere`, `trama`, `locand
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `liste`
+-- Struttura della tabella `Liste`
 --
 
-CREATE TABLE `liste` (
+CREATE TABLE `Liste` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `tipo` varchar(20) NOT NULL,
   `nome` varchar(255) NOT NULL,
   `utente_mail` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `liste`
+-- Dump dei dati per la tabella `Liste`
 --
 
-INSERT INTO `liste` (`id`, `tipo`, `nome`, `utente_mail`) VALUES
+INSERT INTO `Liste` (`id`, `tipo`, `nome`, `utente_mail`) VALUES
 (1, 'seen', 'Film visti', 'gabrisonzo@gmail.com'),
 (2, 'tosee', 'Film da vedere', 'gabrisonzo@gmail.com'),
 (3, 'seen', 'Film visti', 'fabio.oberti@gmail.com'),
@@ -133,33 +133,33 @@ INSERT INTO `liste` (`id`, `tipo`, `nome`, `utente_mail`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recensioni`
+-- Struttura della tabella `Recensioni`
 --
 
-CREATE TABLE `recensioni` (
+CREATE TABLE `Recensioni` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nStelle` int(11) NOT NULL,
   `commento` varchar(1000) DEFAULT NULL,
   `utente_mail` varchar(255) NOT NULL,
   `film_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `recita`
+-- Struttura della tabella `Recita`
 --
 
-CREATE TABLE `recita` (
+CREATE TABLE `Recita` (
   `film_id` int(11) NOT NULL,
   `attori_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `recita`
+-- Dump dei dati per la tabella `Recita`
 --
 
-INSERT INTO `recita` (`film_id`, `attori_id`) VALUES
+INSERT INTO `Recita` (`film_id`, `attori_id`) VALUES
 (1, 1),
 (3, 2),
 (4, 2),
@@ -168,10 +168,10 @@ INSERT INTO `recita` (`film_id`, `attori_id`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `registi`
+-- Struttura della tabella `Registi`
 --
 
-CREATE TABLE `registi` (
+CREATE TABLE `Registi` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nome` varchar(255) NOT NULL,
   `cognome` varchar(255) NOT NULL,
@@ -179,35 +179,35 @@ CREATE TABLE `registi` (
   `data_morte` date DEFAULT NULL,
   `descrizione` varchar(10000) DEFAULT NULL,
   `foto` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `registi`
+-- Dump dei dati per la tabella `Registi`
 --
 
-INSERT INTO `registi` (`id`, `nome`, `cognome`, `data_nascita`, `data_morte`, `descrizione`, `foto`) VALUES
+INSERT INTO `Registi` (`id`, `nome`, `cognome`, `data_nascita`, `data_morte`, `descrizione`, `foto`) VALUES
 (1, 'Quentin', 'Tarantino', '1963-06-25', '1970-01-01', 'È sposato con Daniella Pick dal 28 novembre 2018. Hanno due figli/e.', ''),
 (2, 'Peter', 'Jackson', '1955-08-07', '1970-01-01', 'È sposato con Fran Walsh dal 1987. Hanno due figli/e.', '');
 
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `utenti`
+-- Struttura della tabella `Utenti`
 --
 
-CREATE TABLE `utenti` (
+CREATE TABLE `Utenti` (
   `email` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `ruolo` varchar(20) NOT NULL,
   `foto_profilo` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dump dei dati per la tabella `utenti`
+-- Dump dei dati per la tabella `Utenti`
 --
 
-INSERT INTO `utenti` (`email`, `username`, `password`, `ruolo`, `foto_profilo`) VALUES
+INSERT INTO `Utenti` (`email`, `username`, `password`, `ruolo`, `foto_profilo`) VALUES
 ('fabio.oberti@gmail.com', 'FabioObe', 'a53bd0415947807bcb95ceec535820ee', 'user', NULL),
 ('gabrisonzo@gmail.com', 'GabrySonzo', '21232f297a57a5a743894a0e4a801fc3', 'admin', NULL);
 
@@ -216,57 +216,57 @@ INSERT INTO `utenti` (`email`, `username`, `password`, `ruolo`, `foto_profilo`) 
 --
 
 --
--- Indici per le tabelle `attori`
+-- Indici per le tabelle `Attori`
 --
-ALTER TABLE `attori`
+ALTER TABLE `Attori`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `comprende`
+-- Indici per le tabelle `Comprende`
 --
-ALTER TABLE `comprende`
+ALTER TABLE `Comprende`
   ADD PRIMARY KEY (`lista_id`,`film_id`);
 
 --
--- Indici per le tabelle `dirige`
+-- Indici per le tabelle `Dirige`
 --
-ALTER TABLE `dirige`
+ALTER TABLE `Dirige`
   ADD PRIMARY KEY (`film_id`,`registi_id`);
 
 --
--- Indici per le tabelle `film`
+-- Indici per le tabelle `Film`
 --
-ALTER TABLE `film`
+ALTER TABLE `Film`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `liste`
+-- Indici per le tabelle `Liste`
 --
-ALTER TABLE `liste`
+ALTER TABLE `Liste`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `recensioni`
+-- Indici per le tabelle `Recensioni`
 --
-ALTER TABLE `recensioni`
+ALTER TABLE `Recensioni`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `recita`
+-- Indici per le tabelle `Recita`
 --
-ALTER TABLE `recita`
+ALTER TABLE `Recita`
   ADD PRIMARY KEY (`film_id`,`attori_id`);
 
 --
--- Indici per le tabelle `registi`
+-- Indici per le tabelle `Registi`
 --
-ALTER TABLE `registi`
+ALTER TABLE `Registi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indici per le tabelle `utenti`
+-- Indici per le tabelle `Utenti`
 --
-ALTER TABLE `utenti`
+ALTER TABLE `Utenti`
   ADD PRIMARY KEY (`email`);
 
 --
@@ -274,33 +274,33 @@ ALTER TABLE `utenti`
 --
 
 --
--- AUTO_INCREMENT per la tabella `attori`
+-- AUTO_INCREMENT per la tabella `Attori`
 --
-ALTER TABLE `attori`
+ALTER TABLE `Attori`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT per la tabella `film`
+-- AUTO_INCREMENT per la tabella `Film`
 --
-ALTER TABLE `film`
+ALTER TABLE `Film`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT per la tabella `liste`
+-- AUTO_INCREMENT per la tabella `Liste`
 --
-ALTER TABLE `liste`
+ALTER TABLE `Liste`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT per la tabella `recensioni`
+-- AUTO_INCREMENT per la tabella `Recensioni`
 --
-ALTER TABLE `recensioni`
+ALTER TABLE `Recensioni`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT per la tabella `registi`
+-- AUTO_INCREMENT per la tabella `Registi`
 --
-ALTER TABLE `registi`
+ALTER TABLE `Registi`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
