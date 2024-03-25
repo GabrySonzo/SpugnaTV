@@ -90,3 +90,6 @@ N.B.
 per avere accesso alle funzioni da amministratore accedere come
 email: gabrisonzo@gmail.com
 pswd: admin
+
+COMPOSER INSTALL (PER JWT)
+composer install --ignore-platform-req=ext-simplexml --ignore-platform-req=ext-fileinfo

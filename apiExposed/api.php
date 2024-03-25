@@ -1,7 +1,7 @@
 
 <?php
     header ('Content-Type: application/json');
-    include "backend/connessione.php";
+    include "../backend/connessione.php";
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri = explode( '/', $uri );
@@ -9,6 +9,7 @@
     if(isset($uri[3])){
         $type = $uri[3];
         echo $type;
+        $ok = true;
         if(isset($uri[4])){
             $id = $uri[4];
         }
@@ -43,19 +44,22 @@
             }
         }else{
             echo "Error: invalid type parameter";
+            $ok = false;
         }
 
-        if($result = $connessione->query($query)){
-            $ret = array();
-            while ($row = $result->fetch_assoc()) {
-                $ret[] = $row;
+        if($ok){
+            if($result = $connessione->query($query)){
+                $ret = array();
+                while ($row = $result->fetch_assoc()) {
+                    $ret[] = $row;
+                }
+                $json = json_encode(array("error" => false, "msg" => "Query succesfull", "data" => $ret));
+                echo $json;
             }
-            $json = json_encode(array("error" => false, "msg" => "Query succesfull", "data" => $ret));
-            echo $json;
-        }
-        else{
-            $json = json_encode(array("error" => true, "msg" => "Query failed", "data" => null));
-            echo $json;
+            else{
+                $json = json_encode(array("error" => true, "msg" => "Query failed", "data" => null));
+                echo $json;
+            }
         }
 
     }
