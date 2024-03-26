@@ -1,13 +1,17 @@
 <?php
+header ('Content-Type: application/json');
 
 require_once '../vendor/autoload.php';
 use \Firebase\JWT\JWT;
+use \Firebase\JWT\JWK;
+use \Firebase\JWT\Key;
+
+$token = $_POST['token'];
 
 try {
-    $decoded = JWT::decode($token, new Key("userKey", 'HS256'));
-    return $response->withJson(['data' => (array) $decoded]);
+    $decoded = JWT::decode($token, new key('mysecret', 'HS256'));
+    echo json_encode(array("error" => false, "msg" => "Verified Successfully", "data" => $decoded));
 } catch (\Exception $e) {
-    return $response->withStatus(401)->withJson(['error' => $e->getMessage()]);
+    echo json_encode(array("error" => true, "msg" => $e->getMessage()));
 }
-
 ?>

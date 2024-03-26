@@ -1,5 +1,6 @@
 <?php
 
+header ('Content-Type: application/json');
 // import jwt
 require_once '../vendor/autoload.php';
 use \Firebase\JWT\JWT;
@@ -21,12 +22,7 @@ try {
 
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        if($row["ruolo"] == "admin"){
-            $secret = "adminKey";
-        }
-        else{
-            $secret = "userKey";
-        }
+        $secret = "mysecret";
         $data = array(
             'profile' => 
                     [

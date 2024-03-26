@@ -3,11 +3,15 @@ RewriteEngine On
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 
+# Rewrite per la pagina di login
+RewriteRule ^api/login$ apiExposed/login.html [L]
+
+# Rewrite per la pagina di verifica
+RewriteRule ^api/verify$ apiExposed/verify.html [L]
+
 # Rewrite per le richieste API
 RewriteRule ^api/(.*)$ apiExposed/api.php/$1 [L]
 RewriteRule ^api$ apiExposed/api.php [L]
 
-# Rewrite per la pagina di login
-RewriteRule ^login$ apiExposed/login.html [L]
 
 #http://localhost/www/SpugnaTV/api
