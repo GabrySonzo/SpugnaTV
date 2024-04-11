@@ -2,6 +2,10 @@
 <?php
     header ('Content-Type: application/json');
     include "../backend/connessione.php";
+    require_once '../vendor/autoload.php';
+    use \Firebase\JWT\JWT;
+    use \Firebase\JWT\JWK;
+    use \Firebase\JWT\Key;
 
     $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $uri = explode( '/', $uri );
@@ -10,6 +14,7 @@
         $type = $uri[3];
         echo $type;
         $ok = true;
+        echo $_GET["token"];
         if(isset($uri[4])){
             $id = $uri[4];
         }
@@ -38,9 +43,19 @@
                 $query = "SELECT * FROM Utenti WHERE id = $id";
             }
         }else if($type == "lists"){
-            $query = "SELECT * FROM Liste";
-            if($id != null){
-                $query = "SELECT * FROM Liste WHERE id = $id";
+            if(isset($_GET["token"])){
+                try {
+                    $token = $_GET["token"];
+                    $decoded = JWT::decode($token, new key('mysecret', 'HS256'));
+                    echo $decoded;
+                    $query = "SELECT * FROM Liste";
+                    if($id != null){
+                        $query = "SELECT * FROM Liste WHERE id = $id";
+                    }
+                } catch (\Exception $e) {
+                    echo json_encode(array("error" => true, "msg" => $e->getMessage()));
+                    $ok = false;
+                }
             }
         }else{
             echo "Error: invalid type parameter";
