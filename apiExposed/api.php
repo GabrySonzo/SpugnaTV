@@ -50,6 +50,9 @@
                     echo json_encode(array("error" => true, "msg" => $e->getMessage()));
                     $ok = false;
                 }
+            }else{
+                echo json_encode(array("error" => true, "msg" => "manca il token"));
+                $ok = false;
             }
         }else if($type == "lists"){
             if(isset($_GET["token"])){
