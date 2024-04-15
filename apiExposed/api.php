@@ -75,8 +75,12 @@
                     $ok = false;
                 }
             }
+            else{
+                echo json_encode(array("error" => true, "msg" => "manca il token"));
+                $ok = false;
+            }
         }else{
-            echo "Error: invalid type parameter";
+            echo json_encode(array("error" => true, "msg" => "invalid parameter"));
             $ok = false;
         }
 
