@@ -11,7 +11,7 @@
         <input type="hidden" name="id" value="<?php echo $_GET['list'] ?>">
 
         <label for="nome">Nome:</label>
-        <input type="text" id="nome" name="nome" required><br><br>
+        <input type="text" id="nome" name="nome" value = "<?php echo $list['nome']?>" required><br><br>
 
         
         <input type="submit" value="Modifica lista">
