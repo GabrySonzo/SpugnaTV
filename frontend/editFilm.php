@@ -4,6 +4,13 @@
         <title>Edit film Page</title>
         <?php
         include '../backend/connessione.php';
+        session_start();
+        if (!isset($_SESSION["id"])) {
+            header("Location: login.php");
+        }
+        if ($_SESSION["admin"] == false) {
+            header("Location: home.php");
+        }
         $directors = $connessione->query("SELECT * FROM Registi ORDER BY nome");
         $actors = $connessione->query("SELECT * FROM Attori ORDER BY nome");
         $film = $connessione -> query("SELECT * FROM Film WHERE id = '" . $_GET['film'] . "'") -> fetch_assoc();

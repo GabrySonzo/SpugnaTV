@@ -5,6 +5,9 @@
 </head>
 <?php
     session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
     include '../backend/connessione.php';
     $film = $connessione->query("SELECT * FROM Film WHERE id = '" . $_GET['film'] . "'")->fetch_assoc();
     $directors = $connessione->query("SELECT * FROM Registi INNER JOIN Dirige ON Registi.id = Dirige.registi_id WHERE film_id = '" . $_GET['film'] . "'");

@@ -2,6 +2,15 @@
 <html>
 <head>
     <title>Rate film Page</title>
+    <?php
+        session_start();
+        if (!isset($_SESSION["id"])) {
+            header("Location: login.php");
+        }
+        if ($_SESSION["admin"] == false) {
+            header("Location: home.php");
+        }
+    ?>
 </head>
 <body>
     <h2>Inserisci una recensione</h2>

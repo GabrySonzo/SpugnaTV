@@ -3,6 +3,15 @@
 <head>
     <title>Register actor Page</title>
 </head>
+<?php
+    session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
+    if ($_SESSION["admin"] == false) {
+        header("Location: home.php");
+    }
+?>
 <body>
     <h2>Registra attore</h2>
     <form method="POST" action="../backend/addActorController.php">

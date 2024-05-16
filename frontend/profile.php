@@ -6,6 +6,9 @@
 <?php
     include '../backend/connessione.php';
     session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
     
     $user = $connessione->query("SELECT * FROM Utenti WHERE email = '" . $_SESSION['id'] . "'")->fetch_assoc();
     $lists = $connessione->query("SELECT * FROM Liste WHERE utente_mail = '" . $_SESSION['id'] . "'");

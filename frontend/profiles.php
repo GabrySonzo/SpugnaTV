@@ -5,6 +5,13 @@
 </head>
 <?php
     include '../backend/connessione.php';
+    session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
+    if ($_SESSION["admin"] == false) {
+        header("Location: home.php");
+    }
 ?>
 <body>
     <script>

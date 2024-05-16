@@ -4,6 +4,14 @@
         <title>Register film Page</title>
         <?php
         include '../backend/connessione.php';
+            
+        session_start();
+        if (!isset($_SESSION["id"])) {
+            header("Location: login.php");
+        }
+        if ($_SESSION["admin"] == false) {
+            header("Location: home.php");
+        }
         $directors = $connessione->query("SELECT * FROM Registi order by nome");
         $actors = $connessione->query("SELECT * FROM Attori order by nome");
         ?>

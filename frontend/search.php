@@ -6,6 +6,10 @@
 </head>
 <?php
     include '../backend/connessione.php';
+    session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
 ?>
 <body>
     <h1>Pagina di ricerca</h1>

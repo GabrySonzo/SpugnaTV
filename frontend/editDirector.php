@@ -4,6 +4,13 @@
     <title>Edit director Page</title>
     <?php
         include '../backend/connessione.php';
+        session_start();
+        if (!isset($_SESSION["id"])) {
+            header("Location: login.php");
+        }
+        if ($_SESSION["admin"] == false) {
+            header("Location: home.php");
+        }
         $director = $connessione->query("SELECT * FROM Registi WHERE id = '" . $_GET['director'] . "'")->fetch_assoc();
         ?>
 </head>
