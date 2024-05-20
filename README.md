@@ -94,5 +94,5 @@ pswd: admin
 COMPOSER INSTALL (PER JWT)
 composer install --ignore-platform-req=ext-simplexml --ignore-platform-req=ext-fileinfo
 
-
-https://original-birgitta-spugna-31a5ab7b.koyeb.app/
+Sito
+https://original-birgitta-spugna-31a5ab7b.koyeb.app/www/

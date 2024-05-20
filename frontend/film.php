@@ -76,7 +76,7 @@
                 echo "<a href='editReview.php?review=".$review["id"]."'><button>Modifica recensione</button></a>";
                 echo "<a href='../backend/removeReview.php?review=".$review["id"]."&film=".$_GET['film']."'><button>Elimina recensione</button></a>";
             }else{
-                echo "<a href='addReview.php?film=".$_GET['film']."'><button>Lascia una recensione</button></a>";
+                echo "<a href='registerReview.php?film=".$_GET['film']."'><button>Lascia una recensione</button></a>";
             }
             if(isset($_GET['error'])){
                 if($_GET['error'] == 5){

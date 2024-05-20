@@ -2,6 +2,14 @@
 <html>
 <head>
     <title>Edit list Page</title>
+<?php
+    include '../backend/connessione.php';
+    session_start();
+    if (!isset($_SESSION["id"])) {
+        header("Location: login.php");
+    }
+    $list = $connessione -> query("SELECT * FROM Liste WHERE id = '" . $_GET['list'] . "'") -> fetch_assoc();
+?>
 </head>
 <body>
     <h2>Modifica lista</h2>

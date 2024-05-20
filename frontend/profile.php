@@ -52,6 +52,9 @@
     <a href="registerList.php"><button>Crea lista</button></a>
     <br>
     <br>
+    <a href="editProfile.php"><button>Cambia nome profilo</button></a>
+    <br>
+    <br>
     <button onclick="window.history.back()">Torna indietro</button> <a href="home.php"><button>Torna alla home</button></a>
     <br>
     <br>
@@ -64,6 +67,9 @@
         }
         if (isset($_GET['error']) && $_GET['error'] == 2) {
             echo "<p>Errore durante la creazione della lista</p>";
+        }
+        if (isset($_GET['error']) && $_GET['error'] == 3) {
+            echo "<p>Errore nell'aggiornamento dell'username</p>";
         }
         if (isset($_GET['succ']) && $_GET['succ'] == 1) {
             echo "<p>Lista creata con successo</p>";
